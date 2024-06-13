@@ -1,7 +1,7 @@
 ### Code Climate
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/0f9cac26fd6bc0a2f7a9/maintainability)](https://github.com/atlp-rwanda/e-commerce-serge-30-fn/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/0f9cac26fd6bc0a2f7a9/test_coverage)](https://github.com/atlp-rwanda/e-commerce-serge-30-fn/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/70f6ef35e9f5fc7c39ae/maintainability)](https://codeclimate.com/github/atlp-rwanda/e-commerce-serge-30-fn/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/70f6ef35e9f5fc7c39ae/test_coverage)](https://codeclimate.com/github/atlp-rwanda/e-commerce-serge-30-fn/test_coverage)
 
 
 # E-commerce-serge-30-fn
