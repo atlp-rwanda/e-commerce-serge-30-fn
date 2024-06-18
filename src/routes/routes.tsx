@@ -9,6 +9,7 @@ import {
 } from '../layouts';
 import { ResetPassword } from '../pages/authpages/ResetPassword';
 import { ForgotPassword } from '../pages/authpages/ForgotPassword';
+import * as authPages from '../../src/pages/index';
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,9 @@ export const router = createBrowserRouter([
       { path: 'login', index: true, element: <LoginPage /> },
       { path: 'reset-password/:token', element: <ResetPassword /> },
       { path: 'forgotPassword', element: <ForgotPassword /> },
+      { path: 'signup', element: <authPages.Signup /> },
+      { path: 'verify', element: <authPages.VerificationPage /> },
+      { path: 'verifyFailed', element: <authPages.VerificationFail /> },
     ],
   },
   {

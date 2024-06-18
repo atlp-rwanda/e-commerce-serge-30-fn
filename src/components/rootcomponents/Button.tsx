@@ -13,9 +13,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   children: React.ReactNode;
   className?: string;
+  type?: any;
+  title?: string;
+  disabled?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
+  title,
+  disabled,
   onClick,
   children,
   className,
@@ -26,6 +31,8 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       type={type}
+      disabled={disabled}
+      title={title}
       className={`bg-black hover:bg-blue-700 font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline ${className}`}
       {...props}
     >

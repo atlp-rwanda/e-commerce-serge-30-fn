@@ -3,7 +3,7 @@ interface GoogleBtnProps {
   className?: string;
 }
 
-const GoogleBtn: React.FC<GoogleBtnProps> = ({ className }) => {
+export const GoogleBtn: React.FC<GoogleBtnProps> = ({ className }) => {
   const handleGoogleLogin = () => {
     const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
     const options = {
@@ -26,7 +26,7 @@ const GoogleBtn: React.FC<GoogleBtnProps> = ({ className }) => {
   };
   return (
     <div
-      className={`flex items-center justify-center w-full ${className || ''}`}
+      className={`flex items-center justify-center w-full ${className}`}
       onClick={handleGoogleLogin}
       style={{ cursor: 'pointer' }}
     >
@@ -40,5 +40,3 @@ const GoogleBtn: React.FC<GoogleBtnProps> = ({ className }) => {
     </div>
   );
 };
-
-export default GoogleBtn;
