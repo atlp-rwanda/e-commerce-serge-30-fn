@@ -19,13 +19,16 @@ export const Sidebar = () => {
         </div>
         <ul className="flex flex-col text-slate-600 font-semibold space-y-2">
           {sidebarLinks.map((item) => (
-            <li key={item.id} className="w-full hover:bg-gray-100 cursor-pointer">
+            <li
+              key={item.id}
+              className="w-full hover:bg-gray-100 cursor-pointer"
+            >
               <NavLink
                 end
                 className="flex items-center gap-x-2 p-2 hover:bg-customBlue hover:text-white"
                 to={`/user${item.link}`}
               >
-                 <item.icon className="text-2xl" />
+                <item.icon className="text-2xl" />
                 <span className="tracking-wide">{item.name}</span>
               </NavLink>
             </li>
@@ -50,12 +53,18 @@ export const Sidebar = () => {
             <FaShoppingCart className="text-2xl" />
             <h1 className="text-2xl font-bold">Exclusive</h1>
           </div>
-          <FiMenu className="text-2xl cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
+          <FiMenu
+            className="text-2xl cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)}
+          />
         </div>
         {isOpen && (
           <ul className="flex flex-col text-slate-600 font-semibold space-y-2 mt-4">
             {sidebarLinks.map((item) => (
-              <li key={item.id} className="w-full hover:bg-gray-100 cursor-pointer">
+              <li
+                key={item.id}
+                className="w-full hover:bg-gray-100 cursor-pointer"
+              >
                 <NavLink
                   end
                   className="flex items-center gap-x-2 p-2 hover:bg-customBlue hover:text-white"
@@ -79,4 +88,4 @@ export const Sidebar = () => {
       </div>
     </div>
   );
-}
+};

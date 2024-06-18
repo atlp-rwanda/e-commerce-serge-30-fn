@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { describe, it, vi, expect, beforeEach } from 'vitest';
 
 describe('UpdatePassword component', () => {
-
   beforeEach(() => {
     render(
       <Provider store={store}>
@@ -17,7 +16,7 @@ describe('UpdatePassword component', () => {
           <UpdatePassword />
           <ToastContainer />
         </MemoryRouter>
-      </Provider>
+      </Provider>,
     );
   });
 
@@ -28,8 +27,11 @@ describe('UpdatePassword component', () => {
   it('should render the form components', () => {
     const oldPasswordInput = screen.getByPlaceholderText('Old Password');
     const newPasswordInput = screen.getByPlaceholderText('New Password');
-    const confirmNewPasswordInput = screen.getByPlaceholderText('Confirm Password');
-    const updateButton = screen.getByRole('button', { name: /Update Password/i });
+    const confirmNewPasswordInput =
+      screen.getByPlaceholderText('Confirm Password');
+    const updateButton = screen.getByRole('button', {
+      name: /Update Password/i,
+    });
 
     expect(oldPasswordInput).toBeInTheDocument();
     expect(newPasswordInput).toBeInTheDocument();
@@ -39,30 +41,41 @@ describe('UpdatePassword component', () => {
 
   it('should display an error if new passwords do not match', async () => {
     const newPasswordInput = screen.getByPlaceholderText('New Password');
-    const confirmNewPasswordInput = screen.getByPlaceholderText('Confirm Password');
-    const updateButton = screen.getByRole('button', { name: /Update Password/i });
+    const confirmNewPasswordInput =
+      screen.getByPlaceholderText('Confirm Password');
+    const updateButton = screen.getByRole('button', {
+      name: /Update Password/i,
+    });
 
     fireEvent.change(newPasswordInput, { target: { value: 'password123' } });
-    fireEvent.change(confirmNewPasswordInput, { target: { value: 'password456' } });
+    fireEvent.change(confirmNewPasswordInput, {
+      target: { value: 'password456' },
+    });
     fireEvent.click(updateButton);
 
     await waitFor(() => {
-      expect(screen.getByText('New passwords do not match.')).toBeInTheDocument();
+      expect(
+        screen.getByText('New passwords do not match.'),
+      ).toBeInTheDocument();
     });
   });
 
   it('should display an error if the new password is too short', async () => {
     const newPasswordInput = screen.getByPlaceholderText('New Password');
-    const confirmNewPasswordInput = screen.getByPlaceholderText('Confirm Password');
-    const updateButton = screen.getByRole('button', { name: /Update Password/i });
+    const confirmNewPasswordInput =
+      screen.getByPlaceholderText('Confirm Password');
+    const updateButton = screen.getByRole('button', {
+      name: /Update Password/i,
+    });
 
     fireEvent.change(newPasswordInput, { target: { value: '123' } });
     fireEvent.change(confirmNewPasswordInput, { target: { value: '123' } });
     fireEvent.click(updateButton);
 
     await waitFor(() => {
-      expect(screen.getByText('Password must be a minimum of 6 characters.')).toBeInTheDocument();
+      expect(
+        screen.getByText('Password must be a minimum of 6 characters.'),
+      ).toBeInTheDocument();
     });
   });
-
 });

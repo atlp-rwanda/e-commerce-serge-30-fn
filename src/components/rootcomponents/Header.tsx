@@ -12,6 +12,9 @@ export const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => {
           <Link to="/" className="hover:text-gray-300">
             Home
           </Link>
+          <Link to="/" className="hover:text-gray-300">
+            Home
+          </Link>
         </div>
         {isAuthenticated ? (
           <Button className="bg-white text-blue-500 px-4 py-2 rounded hover:bg-gray-200">

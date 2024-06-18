@@ -6,8 +6,9 @@ import * as authcomponents from '../../components/index';
 import { useNavigate } from 'react-router-dom';
 
 export const UserSettings: React.FC = () => {
-
-  const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated,
+  );
   const navigate = useNavigate();
 
   useEffect(() => {

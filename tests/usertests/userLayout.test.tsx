@@ -17,6 +17,6 @@ describe('UserLayout Component', () => {
       </div>,
     );
 
-    expect(screen.getByText(/Dashboard/i)).toBeInTheDocument(); 
+    expect(screen.getByText(/Dashboard/i)).toBeInTheDocument();
   });
 });

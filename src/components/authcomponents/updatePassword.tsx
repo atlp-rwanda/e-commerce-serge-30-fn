@@ -16,7 +16,7 @@ interface ErrorResponse {
 }
 
 export const UpdatePassword: React.FC = () => {
-  const [ updatePassword ] = useUpdatePasswordMutation();
+  const [updatePassword] = useUpdatePasswordMutation();
   const [oldPassword, setOldPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
@@ -36,19 +36,21 @@ export const UpdatePassword: React.FC = () => {
         // Handle Zod validation errors
         const firstError = error.errors[0];
         const errorMessage = firstError.message;
-  
+
         if (firstError.path[0] === 'confirmNewPassword') {
           dispatch(authSlices.passwordMismatch());
         } else if (firstError.path[0] === 'newPassword') {
           dispatch(authSlices.passwordTooShort());
         }
-  
+
         toast.error(errorMessage);
         return;
       }
-  
+
       // Handle other validation errors
-      toast.error('An error occurred during validation. Please check your input.');
+      toast.error(
+        'An error occurred during validation. Please check your input.',
+      );
       return;
     }
 
@@ -56,7 +58,10 @@ export const UpdatePassword: React.FC = () => {
 
     try {
       if (userId) {
-        await updatePassword({ userId, userCredentials: { oldPassword, newPassword, confirmNewPassword } }).unwrap();
+        await updatePassword({
+          userId,
+          userCredentials: { oldPassword, newPassword, confirmNewPassword },
+        }).unwrap();
         dispatch(authSlices.setSuccess('Password updated successfully!'));
         toast.success('Password updated successfully!');
       } else {
@@ -78,7 +83,6 @@ export const UpdatePassword: React.FC = () => {
     setOldPassword('');
     setNewPassword('');
     setConfirmNewPassword('');
-
   };
 
   return (
@@ -86,7 +90,12 @@ export const UpdatePassword: React.FC = () => {
       <h2 className="text-2xl font-semibold mb-4">Update Password</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <userComponents.Label htmlFor="oldpassword" className="font-normal text-base">Old Password:</userComponents.Label>
+          <userComponents.Label
+            htmlFor="oldpassword"
+            className="font-normal text-base"
+          >
+            Old Password:
+          </userComponents.Label>
           <userComponents.Input
             type="password"
             placeholder="Old Password"
@@ -97,7 +106,12 @@ export const UpdatePassword: React.FC = () => {
           />
         </div>
         <div className="mb-4">
-          <userComponents.Label htmlFor="newPassword" className="font-normal text-base">New Password:</userComponents.Label>
+          <userComponents.Label
+            htmlFor="newPassword"
+            className="font-normal text-base"
+          >
+            New Password:
+          </userComponents.Label>
           <userComponents.Input
             type="password"
             placeholder="New Password"
@@ -108,7 +122,12 @@ export const UpdatePassword: React.FC = () => {
           />
         </div>
         <div className="mb-4">
-          <userComponents.Label htmlFor="confirmNewPassword" className="font-normal text-base">Confirm New Password:</userComponents.Label>
+          <userComponents.Label
+            htmlFor="confirmNewPassword"
+            className="font-normal text-base"
+          >
+            Confirm New Password:
+          </userComponents.Label>
           <userComponents.Input
             type="password"
             placeholder="Confirm Password"
@@ -123,7 +142,9 @@ export const UpdatePassword: React.FC = () => {
           disabled={useSelector((state: RootState) => state.password.loading)}
           className="text-white py-2 px-4 rounded-md"
         >
-          {useSelector((state: RootState) => state.password.loading) ? 'Updating...' : 'Update Password'}
+          {useSelector((state: RootState) => state.password.loading)
+            ? 'Updating...'
+            : 'Update Password'}
         </userComponents.Button>
       </form>
       <ToastContainer />

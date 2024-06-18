@@ -57,5 +57,11 @@ const updatePasswordSlice = createSlice({
   },
 });
 
-export const { passwordMismatch, passwordTooShort, setLoading, setSuccess, setErrorrMsg } = updatePasswordSlice.actions;
+export const {
+  passwordMismatch,
+  passwordTooShort,
+  setLoading,
+  setSuccess,
+  setErrorrMsg,
+} = updatePasswordSlice.actions;
 export default updatePasswordSlice.reducer;
