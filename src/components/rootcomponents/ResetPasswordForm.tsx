@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
-import { Input } from './Input';
+import  Input  from '../Input';
 import Logo from '../../assets/Shopping Cart_48px.png';
 import { validatePassword, passwordsMatch } from '../../utils/validators';
 import { useResetPassword } from '../../hooks/useResetPassword';

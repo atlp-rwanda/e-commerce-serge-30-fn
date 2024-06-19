@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Signup } from '../../src/pages/index';
 import { Provider } from 'react-redux';
-import { store } from '../../src/utils/store';
+import { store } from '../../src/redux/store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 

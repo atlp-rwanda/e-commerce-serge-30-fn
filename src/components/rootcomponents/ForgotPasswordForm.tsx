@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
-import { Input } from './Input';
+import Input from '../Input';
 import Logo from '../../assets/Shopping Cart_48px.png';
 import { validateEmail } from '../../utils/validators';
 import { useForgotPassword } from '../../hooks/useForgotPassword';
@@ -25,37 +25,34 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
   onGoBack,
 }) => {
   const [emailReset, setEmailReset] = useState('');
-  const [error, setError] = useState('');
+  const [validationError, setValidationError] = useState('');
   const {
     forgotPassword,
     loading,
     message,
     error: apiError,
   } = useForgotPassword();
-
-  /**
+    /**
    * Handles form submission to initiate password reset.
    * Validates the email format and triggers the `forgotPassword` hook.
    * Sets appropriate error messages if validation fails or an API error occurs.
    * @returns {Promise<void>}
    */
 
-  const handleResetWithEmail = async () => {
+  const handleResetWithEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!validateEmail(emailReset)) {
-      setError('Please enter a valid email address');
+      setValidationError('Please enter a valid email address');
       return;
     }
-    setError('');
+    setValidationError('');
     await forgotPassword(emailReset);
   };
 
   return (
     <div className="flex justify-center items-center flex-col w-2/3 max-h-screen">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleResetWithEmail();
-        }}
+        onSubmit={handleResetWithEmail}
         className="flex flex-col bg-white-100 px-8 pt-6 pb-6 my-2 w-full max-w-md"
       >
         <h1 className="text-center font-bold flex flex-row justify-center text-xl">
@@ -68,14 +65,14 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
         </h5>
         <Input
           id="userEmail"
-          type="text"
+          type="email"
           placeholder="email@domain.com"
           value={emailReset}
           onChange={(e) => setEmailReset(e.target.value)}
         />
-        {(error || apiError) && (
+        {(validationError || apiError) && (
           <p className="text-red-500 my-1 bg-rose-100 text-center">
-            {error || apiError}
+            {validationError || apiError}
           </p>
         )}
         {message && (
