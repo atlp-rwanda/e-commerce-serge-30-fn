@@ -1,4 +1,4 @@
-import { it, expect } from "vitest";
-it ("should", () =>{
-    expect("Hello").toBeTruthy();
-})
+import { it, expect } from 'vitest';
+it('should', () => {
+  expect('Hello').toBeTruthy();
+});

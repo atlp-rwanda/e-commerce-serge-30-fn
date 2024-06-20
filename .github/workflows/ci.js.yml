@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ["develop"]
+    branches: ['develop']
   pull_request:
-    branches: ["develop"]
+    branches: ['develop']
 
 jobs:
   build:
@@ -27,6 +27,9 @@ jobs:
         run: npm install
       - name: Run Tests
         run: npm run test
+        env:
+          VITE_GOOGLE_REDIRECT_URL: ${{ secrets.VITE_GOOGLE_REDIRECT_URL }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
 
   deploy:
     name: Deploying
@@ -58,3 +61,5 @@ jobs:
           coverageCommand: 'npm run test'
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          VITE_GOOGLE_REDIRECT_URL: ${{ secrets.VITE_GOOGLE_REDIRECT_URL }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
