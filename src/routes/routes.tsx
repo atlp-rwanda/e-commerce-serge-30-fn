@@ -13,6 +13,7 @@ import * as authPages from '../../src/pages/index';
 import TwoFactorAuth from '../pages/auth/TwoFactorAuth';
 import NewProduct from '../pages/rootpages/NewProduct';
 import AllProducts from '../pages/rootpages/AllProducts';
+import { Product, ProductItem } from '../pages/vendorpages';
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +49,16 @@ export const router = createBrowserRouter([
   {
     path: 'vendor',
     element: <VendorLayout />,
-    children: [],
+    children: [
+      {
+        path: 'products',
+        element: <Product />,
+      },
+      {
+        path: 'products/:id',
+        element: <ProductItem />,
+      },
+    ],
   },
   {
     path: 'admin',

@@ -1,55 +1,32 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useLogoutMutation } from '../service/authApi';
+import Sidebar from '../components/vendorcomponents/Sidebar';
+import Navbar from '../components/vendorcomponents/Navbar';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { setToken, setUser } from '../redux/features/auth/authSlice';
-import { useDispatch } from 'react-redux';
+
 export const VendorLayout: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get('token') || null;
-  const user = searchParams.get('user') || null;
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (token != null) {
-      localStorage.setItem('token', token);
-      dispatch(setToken(token));
-    }
-
-    if (user != null) {
-      const decodedUser = decodeURIComponent(user);
-      const userObject = JSON.parse(decodedUser);
-
-      dispatch(setUser(userObject));
-    }
-    setSearchParams({});
-    window.history.replaceState({}, '', window.location.pathname);
-  }, [token, user, dispatch]);
-  const [logout, { isLoading }] = useLogoutMutation();
   const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      await logout({});
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      navigate('/');
-    } catch (error) {
-      console.error('Error during logout:', error);
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.user.isAuthenticated,
+  );
+  //use effect hook if !isAuthenticated navigate to login page
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/auth/login');
     }
-  };
+  }, [isAuthenticated, navigate]);
+
   return (
-    <main className="h-screen">
-      <aside>sidebar vendor</aside>
-      {isLoading ? (
-        <button>Loading..</button>
-      ) : (
-        <button onClick={handleLogout}>Logout</button>
-      )}
-      <section>
-        <nav>navbar vendor</nav>
-        <Outlet />
+    <main className="h-screen flex overflow-hidden">
+      <aside>
+        <Sidebar />
+      </aside>
+      <section className="flex-1 flex flex-col">
+        <Navbar />
+        <main className="flex-1 overflow-y-auto pb-3">
+          <Outlet />
+        </main>
       </section>
     </main>
   );

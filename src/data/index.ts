@@ -7,3 +7,4 @@ export * from './ReviewData';
 export * from './ServiceData';
 export * from './ShopData';
 export * from './sidebarLinks';
+export * from './VendorSidebarLinks';
