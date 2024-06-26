@@ -7,7 +7,8 @@ import {
   VendorLayout,
   UserLayout,
 } from '../layouts';
-import SignupPage from '../pages/authpages/SignupPage';
+import { ResetPassword } from '../pages/authpages/ResetPassword';
+import { ForgotPassword } from '../pages/authpages/ForgotPassword';
 
 export const router = createBrowserRouter([
   {
@@ -15,7 +16,6 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-
       { path: '*', element: <NotFoundPage /> },
     ],
   },
@@ -24,7 +24,8 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       { path: 'login', index: true, element: <LoginPage /> },
-      { path: 'signup', element: <SignupPage /> },
+      { path: 'reset-password/:token', element: <ResetPassword /> },
+      { path: 'forgotPassword', element: <ForgotPassword /> },
     ],
   },
   {
