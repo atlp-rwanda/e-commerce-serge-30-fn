@@ -10,3 +10,4 @@ export * from './authcomponents/updatePassword';
 export * from './rootcomponents/Sidebar';
 export * from './rootcomponents/RequestPwdChangeForm';
 export * from './vendorcomponents/DeleteProduct';
+export * from './ToastMessage';

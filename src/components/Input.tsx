@@ -13,7 +13,6 @@ interface InputProps {
   borderColor?: string;
 }
 
-// Use React.forwardRef to forward the ref to the input element
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
