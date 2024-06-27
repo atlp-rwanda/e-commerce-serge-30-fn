@@ -12,30 +12,39 @@ import React from 'react';
  * @returns {JSX.Element} Input element with label and styles.
  */
 interface InputProps {
-  id: string;
-  type: string;
-  placeholder: string;
-  value: string;
-  onChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+  name?: string;
+  title?: string;
+  placeholder?: string;
+  value?: string;
+  borderColor?: string;
   className?: string;
+  className1?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  id?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
   id,
   type,
+  name,
+  title,
   placeholder,
   value,
-  onChange,
   className,
+  className1,
+  onChange,
 }) => {
   return (
-    <div className={`mb-4 ${className}`}>
+    <div className={`mb-4 ${className1}`}>
       <input
-        className="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className={`shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${className}`}
         id={id}
         type={type}
+        name={name}
+        title={title}
         placeholder={placeholder}
-        value={value}
+        value={value ?? ''}
         onChange={onChange}
       />
     </div>
