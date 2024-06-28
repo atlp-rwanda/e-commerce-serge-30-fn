@@ -5,3 +5,6 @@ export * from './rootcomponents/Label';
 export * from './rootcomponents/ForgotPasswordForm';
 export * from './rootcomponents/ResetPasswordForm';
 export * from './authcomponents/GoogleBtn';
+export * from './authcomponents/editProfile';
+export * from './authcomponents/updatePassword';
+export * from './rootcomponents/Sidebar';

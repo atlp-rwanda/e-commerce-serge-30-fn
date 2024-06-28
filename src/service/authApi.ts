@@ -17,7 +17,19 @@ const authApi = ecommerceSergeApi.injectEndpoints({
               body,
             }),
           }),
+        updatePassword: builder.mutation({
+          query: ({ userId, userCredentials }) => ({
+            url: `api/v1/auth/${userId}/update-password`,
+            method: 'PUT',
+            headers: { "Content-Type": "application/json" },
+            body: {
+              oldPassword: userCredentials.oldPassword,
+              newPassword: userCredentials.newPassword,
+              confirmPassword: userCredentials.confirmNewPassword,
+            },
+          }),
+        }),
     })
 })
-export const { useLoginUserMutation, useForgotPasswordMutation } = authApi
+export const { useLoginUserMutation, useForgotPasswordMutation, useUpdatePasswordMutation  } = authApi
 ;
