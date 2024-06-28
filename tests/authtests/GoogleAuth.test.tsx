@@ -1,21 +1,22 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { GoogleBtn } from '../../src/components/index';
+import {GoogleBtn} from '../../src/components/authcomponents/GoogleBtn';
 import React from 'react';
 
 describe('GoogleBtn Component', () => {
   it('renders the Google button', () => {
     render(<GoogleBtn />);
-    const buttonElement = screen.getByTitle('Click to continue with google');
+    const buttonElement = screen.getByTitle('Click to continue with Google'); 
     expect(buttonElement).toBeInTheDocument();
-    expect(buttonElement).toHaveTextContent('Signup with Google');
+    expect(buttonElement).toHaveTextContent('Sign up with Google'); 
   });
 
   it('redirects to Google Auth URL on click', () => {
+    delete (window as any).location;
     window.location = { href: '' } as Location;
 
     render(<GoogleBtn />);
-    const buttonElement = screen.getByTitle('Click to continue with google');
+    const buttonElement = screen.getByTitle('Click to continue with Google'); 
     fireEvent.click(buttonElement);
 
     const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';

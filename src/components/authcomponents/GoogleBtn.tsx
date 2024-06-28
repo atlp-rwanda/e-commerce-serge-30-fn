@@ -1,4 +1,5 @@
 import image2 from '../../assets/Google.png';
+
 interface GoogleBtnProps {
   className?: string;
 }
@@ -17,13 +18,11 @@ export const GoogleBtn: React.FC<GoogleBtnProps> = ({ className }) => {
         'https://www.googleapis.com/auth/userinfo.email',
       ].join(' '),
     };
-    console.log({ options });
     const qs = new URLSearchParams(options);
-    console.log(qs.toString());
     const googleAuthUrl = `${rootUrl}?${qs.toString()}`;
-    console.log(googleAuthUrl);
     window.location.href = googleAuthUrl;
   };
+
   return (
     <div
       className={`flex items-center justify-center w-full ${className}`}
@@ -31,11 +30,11 @@ export const GoogleBtn: React.FC<GoogleBtnProps> = ({ className }) => {
       style={{ cursor: 'pointer' }}
     >
       <div
-        title="Click to continue with google"
-        className="bg-[#EEEEEE] w-full text-black rounded-[8px] py-2 px-4 box-border relative hover:bg-[#eceaea]"
+        title="Click to continue with Google"
+        className="flex items-center justify-center bg-[#EEEEEE] w-full text-black rounded-[8px] px-4 py-2 hover:bg-[#eceaea] transition duration-300"
       >
-        <img src={image2} alt="google icon" className="absolute top-[10px]" />
-        <p>Signup with Google</p>
+        <img src={image2} alt="Google icon" className="w-6 h-6 mr-2" />
+        <p className="text-sm sm:text-base">Sign up with Google</p>
       </div>
     </div>
   );
