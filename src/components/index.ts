@@ -8,3 +8,4 @@ export * from './authcomponents/GoogleBtn';
 export * from './authcomponents/editProfile';
 export * from './authcomponents/updatePassword';
 export * from './rootcomponents/Sidebar';
+export * from './rootcomponents/RequestPwdChangeForm';

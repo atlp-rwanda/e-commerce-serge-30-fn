@@ -31,6 +31,7 @@ export const router = createBrowserRouter([
       { path: 'signup', element: <authPages.Signup /> },
       { path: 'verify', element: <authPages.VerificationPage /> },
       { path: 'verifyFailed', element: <authPages.VerificationFail /> },
+      { path: 'renew-password', element: <authPages.RequestPwdChange /> },
     ],
   },
   {

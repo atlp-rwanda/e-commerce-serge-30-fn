@@ -23,7 +23,10 @@ export const useForgotPassword = () => {
       setMessage(result.message || 'A reset link has been sent to your email');
     } catch (error) {
       if (typeof error === 'object' && error !== null && 'data' in error) {
-        setError((error.data as { message?: string }).message || 'Something went wrong');
+        setError(
+          (error.data as { message?: string }).message ||
+            'Something went wrong',
+        );
       } else {
         setError('Network error, please try again later');
       }

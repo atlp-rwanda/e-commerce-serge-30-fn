@@ -1,4 +1,4 @@
-import { ecommerceSergeApi } from "./index";
+import { ecommerceSergeApi } from './index';
 const authApi = ecommerceSergeApi.injectEndpoints({
     endpoints:builder =>({
         loginUser: builder.mutation({
