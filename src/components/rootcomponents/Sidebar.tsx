@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { IoLogOutOutline } from 'react-icons/io5';
 import { CiSettings } from 'react-icons/ci';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { SidebarLink } from '../../data/index';
 
@@ -11,7 +11,12 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    navigate('me');
+  };
 
   return (
     <div>
@@ -39,7 +44,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
           ))}
         </ul>
         <ul className="mt-auto">
-          <li className="flex gap-x-2 p-3 items-center hover:bg-customBlue hover:text-white cursor-pointer">
+          <li
+            className="flex gap-x-2 p-3 items-center hover:bg-customBlue hover:text-white cursor-pointer"
+            onClick={handleClick}
+          >
             <CiSettings className="text-2xl" />
             <span>Settings</span>
           </li>
@@ -79,7 +87,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
                 </NavLink>
               </li>
             ))}
-            <li className="flex gap-x-2 p-3 items-center hover:bg-customBlue hover:text-white cursor-pointer">
+            <li
+              className="flex gap-x-2 p-3 items-center hover:bg-customBlue hover:text-white cursor-pointer"
+              onClick={handleClick}
+            >
               <CiSettings className="text-2xl" />
               <span>Settings</span>
             </li>
