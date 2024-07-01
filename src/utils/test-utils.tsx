@@ -34,7 +34,7 @@ export function renderWithProviders(
     }),
     route = '/',
     ...renderOptions
-  }: ExtendedRenderOptions = {}
+  }: ExtendedRenderOptions = {},
 ) {
   function Wrapper({ children }: { children: React.ReactNode }) {
     return (

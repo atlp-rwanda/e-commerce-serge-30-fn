@@ -8,15 +8,16 @@ import UpdatePasswordReducer from '../slices/updatepassword.slice';
 export const store = configureStore({
   reducer: {
     user: userReducer,
-     signup: signupReducer,
+    signup: signupReducer,
     verification: verificationReducer,
     [ecommerceSergeApi.reducerPath]: ecommerceSergeApi.reducer,
     password: UpdatePasswordReducer,
   },
-  middleware : getDefaultMiddle => getDefaultMiddle().concat(ecommerceSergeApi.middleware),
+  middleware: (getDefaultMiddle) =>
+    getDefaultMiddle().concat(ecommerceSergeApi.middleware),
 });
 
-setupListeners(store.dispatch)
+setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
 

@@ -33,7 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
       type={type}
       disabled={disabled}
       title={title}
-      className={`bg-black hover:bg-blue-700 font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline ${className}`}
+      className={`bg-black hover:bg-neutral-800 font-semibold text-sm py-1 px-4 rounded-lg focus:outline-none focus:shadow-outline ${className}`}
       {...props}
     >
       {children}

@@ -1,24 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JwtPayload } from 'jwt-decode';
 interface User {
-    active: boolean;
-    createdAt: string;
-    email: string;
-    emailVerificationToken: string;
-    emailVerificationTokenExpiration: string;
-    firstname: string;
-    google_id: string | null;
-    google_token: string | null;
-    image_url: string | null;
-    lastname: string;
-    resetToken: string | null;
-    resetTokenExpiration: string | null;
-    role: 'ADMIN' | 'USER' | 'VENDOR'; 
-    updatedAt: string;
-    user_id: string;
-    username: string;
-    verified: boolean;
-  }
+  active: boolean;
+  createdAt: string;
+  email: string;
+  emailVerificationToken: string;
+  emailVerificationTokenExpiration: string;
+  firstname: string;
+  google_id: string | null;
+  google_token: string | null;
+  image_url: string | null;
+  lastname: string;
+  resetToken: string | null;
+  resetTokenExpiration: string | null;
+  role: 'ADMIN' | 'USER' | 'VENDOR';
+  updatedAt: string;
+  user_id: string;
+  username: string;
+  verified: boolean;
+}
 export interface UserState {
   token: string | null;
   user: User | null;
@@ -27,7 +27,7 @@ export interface UserState {
 
 const initialState: UserState = {
   token: localStorage.getItem('token'),
-  user:JSON.parse(localStorage.getItem('user')!) || 'null',
+  user: JSON.parse(localStorage.getItem('user')!) || 'null',
   isAuthenticated: !!localStorage.getItem('token'),
 };
 
@@ -52,7 +52,7 @@ const userSlice = createSlice({
         localStorage.removeItem('user');
       }
     },
-    clearUserData: state => {
+    clearUserData: (state) => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       state.token = null;
@@ -62,8 +62,8 @@ const userSlice = createSlice({
   },
 });
 export interface CustomJwtPayload extends JwtPayload {
-    user: User
-  }
+  user: User;
+}
 export const { setToken, setUser, clearUserData } = userSlice.actions;
 
 export default userSlice.reducer;

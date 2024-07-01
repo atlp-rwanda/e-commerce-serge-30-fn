@@ -32,7 +32,7 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
     message,
     error: apiError,
   } = useForgotPassword();
-    /**
+  /**
    * Handles form submission to initiate password reset.
    * Validates the email format and triggers the `forgotPassword` hook.
    * Sets appropriate error messages if validation fails or an API error occurs.

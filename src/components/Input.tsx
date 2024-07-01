@@ -14,33 +14,38 @@ interface InputProps {
 }
 
 // Use React.forwardRef to forward the ref to the input element
-export const Input = forwardRef<HTMLInputElement, InputProps>(({
-  type = 'text',
-  name,
-  title,
-  placeholder,
-  value,
-  className1,
-  id,
-  onChange,
-  className = '',
-  
-  borderColor = 'border-gray-300',
-}, ref) => {
-  return (
-    <div className={`mb-4 ${ className1}`}>
-      <input
-        ref={ref}
-        type={type}
-        name={name}
-        title={title}
-        id={id}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        className={`rounded w-full py-2 px-4 text-gray-700 shadow-sm focus:outline-none focus:shadow-outline ${borderColor} ${className}`}
-      />
-    </div>
-  );
-});
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      type = 'text',
+      name,
+      title,
+      placeholder,
+      value,
+      className1,
+      id,
+      onChange,
+      className = '',
+
+      borderColor = 'border-gray-300',
+    },
+    ref,
+  ) => {
+    return (
+      <div className={`mb-4 ${className1}`}>
+        <input
+          ref={ref}
+          type={type}
+          name={name}
+          title={title}
+          id={id}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          className={`rounded w-full py-2 px-4 text-gray-700 shadow-sm focus:outline-none focus:shadow-outline ${borderColor} ${className}`}
+        />
+      </div>
+    );
+  },
+);
 export default Input;

@@ -37,21 +37,29 @@ const LoginForm: React.FC<LoginFormProps> = ({
     handleSubmit,
     setError,
     formState: { errors },
+    watch,
   } = useForm<FormData>({
     resolver: zodResolver(loginSchema),
   });
   const [loginUser, { data, error, isSuccess, isError }] =
     useLoginUserMutation();
+  const emailEntered = watch('email');
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/');
     }
     if (isError && error) {
-      toast.error('Invalid email or password');
+      const errorMessage =
+        (error as any)?.data?.message || 'Invalid email or password';
+      toast.error(errorMessage);
       setError('root', {
         message: 'Invalid email or password',
       });
-      setIsLoading(false); 
+      setIsLoading(false);
+      if (errorMessage == 'Your password has expired, you need to update it.')
+        setTimeout(() => {
+          navigate('/auth/renew-password', { state: { emailEntered } });
+        }, 3000);
     }
 
     if (isSuccess && data) {
@@ -74,7 +82,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         default:
           navigate('/');
       }
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   }, [
     isError,
@@ -132,7 +140,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email ? 'border-red-500' : ''}`}
             />
             {errors.email && typeof errors.email.message === 'string' && (
-              <p className="text-red-500 text-md mt-1">{errors.email.message}</p>
+              <p className="text-red-500 text-md mt-1">
+                {errors.email.message}
+              </p>
             )}
           </div>
           <div className="mb-2">
@@ -144,7 +154,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
               className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.password ? 'border-red-500' : ''}`}
             />
             {errors.password && typeof errors.password.message === 'string' && (
-              <p className="text-red-500 text-md mt-1">{errors.password.message}</p>
+              <p className="text-red-500 text-md mt-1">
+                {errors.password.message}
+              </p>
             )}
           </div>
           <div className="flex flex-col items-center  text-white justify-between mb-2">
