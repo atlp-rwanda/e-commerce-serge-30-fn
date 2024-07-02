@@ -19,7 +19,12 @@ export const EditProfile = () => {
 
       <form>
         <div className="mb-4">
-          <userComponents.Label htmlFor="username" className="font-normal text-base">Username:</userComponents.Label>
+          <userComponents.Label
+            htmlFor="username"
+            className="font-normal text-base"
+          >
+            Username:
+          </userComponents.Label>
           <userComponents.Input
             type="text"
             id="username"
@@ -30,7 +35,12 @@ export const EditProfile = () => {
         </div>
 
         <div className="mb-4">
-          <userComponents.Label htmlFor="profilePhoto" className="font-normal text-base">Profile Photo URL:</userComponents.Label>
+          <userComponents.Label
+            htmlFor="profilePhoto"
+            className="font-normal text-base"
+          >
+            Profile Photo URL:
+          </userComponents.Label>
           <userComponents.Input
             type="text"
             id="profilePhoto"
@@ -41,7 +51,12 @@ export const EditProfile = () => {
         </div>
 
         <div className="mb-4">
-          <userComponents.Label htmlFor="email" className="font-normal text-base">Email:</userComponents.Label>
+          <userComponents.Label
+            htmlFor="email"
+            className="font-normal text-base"
+          >
+            Email:
+          </userComponents.Label>
           <userComponents.Input
             type="email"
             id="email"
@@ -52,7 +67,12 @@ export const EditProfile = () => {
         </div>
 
         <div className="mb-4">
-          <userComponents.Label htmlFor="urls" className="font-normal text-base">URLs:</userComponents.Label>
+          <userComponents.Label
+            htmlFor="urls"
+            className="font-normal text-base"
+          >
+            URLs:
+          </userComponents.Label>
           <userComponents.Input
             type="text"
             id="url1"
@@ -77,7 +97,9 @@ export const EditProfile = () => {
         </div>
 
         <div className="mb-4">
-          <userComponents.Label htmlFor="bio" className="font-normal text-base">Bio:</userComponents.Label>
+          <userComponents.Label htmlFor="bio" className="font-normal text-base">
+            Bio:
+          </userComponents.Label>
           <textarea
             id="bio"
             rows={3}
@@ -95,4 +117,4 @@ export const EditProfile = () => {
       </form>
     </div>
   );
-}
+};

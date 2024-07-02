@@ -16,6 +16,7 @@ import LoginButton from '../rootcomponents/LoginButton';
 import { useLoginUserMutation } from '../../service/authApi';
 import { GoogleBtn } from '../authcomponents/GoogleBtn';
 import { ColorRing } from 'react-loader-spinner';
+
 interface LoginFormProps {
   onGoBack: () => void;
   onLoginWithGoogle: () => void;
@@ -77,7 +78,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
           navigate('admin');
           break;
         case 'VENDOR':
-          navigate('vendor');
+          // navigate("/vendor")
+          navigate('/auth/two-factor-auth');
           break;
         default:
           navigate('/');

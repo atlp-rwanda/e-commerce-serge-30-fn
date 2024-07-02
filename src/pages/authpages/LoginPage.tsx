@@ -1,4 +1,4 @@
-import logInImage from '../../assets/store-card-40-watch-s9-202309.png';
+import logInImage from '../../assets/store-card-40-watch-s9-202309.jpeg';
 import LoginForm from '../../components/usercomponents/LoginForm';
 import { useNavigate } from 'react-router';
 export function LoginPage() {
@@ -12,9 +12,9 @@ export function LoginPage() {
     navigate('/auth/forgotPassword');
   };
   return (
-    <div className="flex bg-white">
+    <div className="flex justify-between bg-white">
       <div
-        className="hidden lg:block lg:w-1/2 bg-cover abg-center h-screen"
+        className=" w-full max-tablet:hidden bg-cover bg-center h-screen"
         style={{ backgroundImage: `url(${logInImage})` }}
       ></div>
       <div className="w-screen lg:w-1/2  h-screen flex justify-center items-center">

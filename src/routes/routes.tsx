@@ -10,6 +10,9 @@ import {
 import { ResetPassword } from '../pages/authpages/ResetPassword';
 import { ForgotPassword } from '../pages/authpages/ForgotPassword';
 import * as authPages from '../../src/pages/index';
+import TwoFactorAuth from '../pages/auth/TwoFactorAuth';
+import NewProduct from '../pages/rootpages/NewProduct';
+import AllProducts from '../pages/rootpages/AllProducts';
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +20,8 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: '/new', element: <NewProduct /> },
+      { path: '/shop', element: <AllProducts /> },
 
       { path: '*', element: <NotFoundPage /> },
     ],
@@ -28,6 +33,7 @@ export const router = createBrowserRouter([
       { path: 'login', index: true, element: <LoginPage /> },
       { path: 'reset-password/:token', element: <ResetPassword /> },
       { path: 'forgotPassword', element: <ForgotPassword /> },
+      { path: 'two-factor-auth', element: <TwoFactorAuth /> },
       { path: 'signup', element: <authPages.Signup /> },
       { path: 'verify', element: <authPages.VerificationPage /> },
       { path: 'verifyFailed', element: <authPages.VerificationFail /> },
@@ -37,9 +43,7 @@ export const router = createBrowserRouter([
   {
     path: 'user',
     element: <UserLayout />,
-    children: [
-      { path: 'usersettings', element: <authPages.UserSettings /> },
-    ],
+    children: [{ path: 'usersettings', element: <authPages.UserSettings /> }],
   },
   {
     path: 'vendor',
