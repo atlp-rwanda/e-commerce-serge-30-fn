@@ -2,10 +2,8 @@ import { useState } from 'react';
 import logoImage from '../../assets/Group 1000005934.png';
 import MenuLinks from '../rootcomponents/MenuLinks';
 import MenuLinksIcons from '../rootcomponents/MenuLinksIcons';
-interface HeaderProps {
-  isAuthenticated: boolean;
-}
-const NavBar: React.FC<HeaderProps> = ({ isAuthenticated }) => {
+
+const NavBar = () => {
   const [menuActive, setMenuActive] = useState(false);
   const handleMenu = () => {
     setMenuActive(!menuActive);
@@ -20,7 +18,7 @@ const NavBar: React.FC<HeaderProps> = ({ isAuthenticated }) => {
         <nav
           className={`menu flex space-x-4 text-slate-700 ${menuActive ? 'max-tablet:flex max-tablet:flex-col max-tablet:z-10 max-tablet:absolute max-tablet:right-20 max-tablet:pt-60 max-tablet:pr-40 max-tablet:text-4xl max-tablet:gap-4 max-tablet:text-left max-tablet:items-baseline' : ''} max-tablet:hidden`}
         >
-          <MenuLinks className="flex gap-4" isAuthenticated={isAuthenticated} />
+          <MenuLinks className="flex gap-4" />
         </nav>
         <div
           className={`links text-black flex items-center gap-4 ${menuActive ? 'max-tablet:flex max-tablet:flex-col max-tablet:z-10 max-tablet:absolute max-tablet:right-20 max-tablet:pt-96 max-tablet:mt-56 max-tablet:pr-40 max-tablet:text-lg max-tablet:text-left max-tablet:items-baseline' : ''} max-tablet:hidden`}
