@@ -6,7 +6,32 @@ import Footer from '../../components/rootcomponents/Footer';
 import HomeReviews from '../../components/rootcomponents/HomeReviews';
 import FeaturesSection from '../../components/rootcomponents/FeatureSection';
 import MoreServices from '../../components/rootcomponents/MoreServices';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { setToken, setUser } from '../../redux/features/auth/authSlice';
+import { useDispatch } from 'react-redux';
 export function HomePage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get('token') || null;
+  const user = searchParams.get('user') || null;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token != null) {
+      localStorage.setItem('token', token);
+      dispatch(setToken(token));
+    }
+
+    if (user != null) {
+      const decodedUser = decodeURIComponent(user);
+      const userObject = JSON.parse(decodedUser);
+
+      dispatch(setUser(userObject));
+    }
+    setSearchParams({});
+    window.history.replaceState({}, '', window.location.pathname);
+  }, [token, user, dispatch]);
   return (
     <div className="max-tablet:px-4   backgroundImage">
       <div className="px-4 pt-6 flex gap-2 justify-between font-outfit">
