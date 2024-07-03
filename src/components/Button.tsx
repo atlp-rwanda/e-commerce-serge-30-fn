@@ -1,5 +1,5 @@
 interface ButtonEl {
-  type: any;
+  type: 'button' | 'submit' | 'reset';
   title: string;
   bgColor?: string;
   children: string;
