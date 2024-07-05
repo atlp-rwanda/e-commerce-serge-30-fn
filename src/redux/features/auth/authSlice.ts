@@ -59,11 +59,15 @@ const userSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
     },
+    setAuthentication(state, action) {
+      state.isAuthenticated = action.payload;
+    },
   },
 });
 export interface CustomJwtPayload extends JwtPayload {
   user: User;
 }
-export const { setToken, setUser, clearUserData } = userSlice.actions;
+export const { setToken, setUser, clearUserData, setAuthentication } =
+  userSlice.actions;
 
 export default userSlice.reducer;

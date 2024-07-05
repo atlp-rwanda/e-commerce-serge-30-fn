@@ -4,6 +4,7 @@ interface IconButtonProps {
   colorClasses: string;
   IconComponent: React.ElementType; // Accepts a component like FaEdit, FaTrashAlt
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export const ActionButton: React.FC<IconButtonProps> = ({
@@ -11,11 +12,13 @@ export const ActionButton: React.FC<IconButtonProps> = ({
   colorClasses,
   IconComponent,
   onClick,
+  disabled,
 }) => {
   return (
     <button
-      className={`px-6 py-2 rounded flex items-center transition duration-150 ease-in-out ${colorClasses}`}
+      className={`rounded flex items-center transition duration-150 ease-in-out ${colorClasses}`}
       onClick={onClick}
+      disabled={disabled}
     >
       <IconComponent className="mr-2" /> {text}
     </button>

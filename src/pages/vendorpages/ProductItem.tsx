@@ -5,12 +5,12 @@ import {
   FaCalendarAlt,
   FaTags,
   FaEdit,
-  FaTrashAlt,
 } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 import { IProduct } from '../../types';
 import { ErrorPage } from '../../utils/ErrorPage';
 import { ActionButton } from '../../components/vendorcomponents/ActionButton';
+import * as vendorComponents from '../../components/index';
 
 const ProductItem: React.FC = () => {
   const location = useLocation();
@@ -98,15 +98,14 @@ const ProductItem: React.FC = () => {
           <div className="flex gap-x-4">
             <ActionButton
               text="Update."
-              colorClasses="bg-blue-600 hover:bg-blue-700 text-white"
+              colorClasses="bg-blue-600 px-6 py-2 hover:bg-blue-700 text-white"
               IconComponent={FaEdit}
               onClick={() => console.log('Update clicked')}
             />
-            <ActionButton
-              text="Delete"
-              colorClasses="bg-red-600 hover:bg-red-700 text-white"
-              IconComponent={FaTrashAlt}
-              onClick={() => console.log('Delete clicked')}
+            <vendorComponents.DeleteProduct
+              product_id={product.product_id}
+              iconOnly={false}
+              customClasses="bg-red-300 px-3 rounded flex items-center transition duration-150 ease-in-out"
             />
           </div>
         </div>

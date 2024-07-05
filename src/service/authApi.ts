@@ -71,6 +71,20 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         },
       }),
     }),
+    assignRole: builder.mutation<
+      { message: string },
+      { id: string; token: string; role: string }
+    >({
+      query: ({ id, token, role }) => ({
+        url: `api/v1/role/${id}`,
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: ` ${token}`,
+        },
+        body: { role },
+      }),
+    }),
   }),
 });
 export const {
@@ -81,4 +95,5 @@ export const {
   useVerifyCodeMutation,
   useSendVerificationMutation,
   useUpdatePasswordMutation,
+  useAssignRoleMutation,
 } = authApi;
