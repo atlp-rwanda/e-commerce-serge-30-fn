@@ -1,18 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { HomePage, LoginPage, NotFoundPage } from '../pages';
+import * as authPages from '../../src/pages/index';
 import {
-  RootLayout,
   AdminLayout,
   AuthLayout,
-  VendorLayout,
+  RootLayout,
   UserLayout,
+  VendorLayout,
 } from '../layouts';
-import { ResetPassword } from '../pages/authpages/ResetPassword';
-import { ForgotPassword } from '../pages/authpages/ForgotPassword';
-import * as authPages from '../../src/pages/index';
+import { HomePage, LoginPage, NotFoundPage } from '../pages';
+import { Users } from '../pages/adminpages/index';
 import TwoFactorAuth from '../pages/auth/TwoFactorAuth';
-import NewProduct from '../pages/rootpages/NewProduct';
+import { ForgotPassword } from '../pages/authpages/ForgotPassword';
+import { ResetPassword } from '../pages/authpages/ResetPassword';
 import AllProducts from '../pages/rootpages/AllProducts';
+import NewProduct from '../pages/rootpages/NewProduct';
 import { Product, ProductItem } from '../pages/vendorpages';
 
 export const router = createBrowserRouter([
@@ -63,6 +64,6 @@ export const router = createBrowserRouter([
   {
     path: 'admin',
     element: <AdminLayout />,
-    children: [],
+    children: [{ path: 'users', element: <Users /> }],
   },
 ]);
