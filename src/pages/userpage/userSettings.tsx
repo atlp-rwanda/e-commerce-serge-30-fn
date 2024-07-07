@@ -21,13 +21,13 @@ export const UserSettings: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col md:flex-row">
+    <div className="h-screen flex flex-col tablet:flex-row">
       <div className="w-full md:w-3/5 bg-zinc-50 border-r border-gray-300">
         <div className="p-4">
           <authcomponents.EditProfile />
         </div>
       </div>
-      <div className="w-full md:w-2/5 bg-zinc-50">
+      <div className="w-full tablet:w-2/5 bg-zinc-50">
         <div className="p-4">
           <authcomponents.UpdatePassword />
         </div>

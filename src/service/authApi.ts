@@ -85,6 +85,19 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         body: { role },
       }),
     }),
+    disableAccount: builder.mutation<
+      { message: string },
+      { id: string; token: string; }
+    >({
+      query: ({ id, token }) => ({
+        url: `api/v1/admin/disable/${id}`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: ` ${token}`,
+        },
+      }),
+    }),
   }),
 });
 export const {
@@ -96,4 +109,5 @@ export const {
   useSendVerificationMutation,
   useUpdatePasswordMutation,
   useAssignRoleMutation,
+  useDisableAccountMutation,
 } = authApi;
