@@ -2,7 +2,7 @@ import axios from 'axios';
 import useSWR from 'swr';
 import { useToken } from './useToken';
 
-const baseUrl = import.meta.env.VITE_DEPLOYED_URL;
+export const baseUrl = import.meta.env.VITE_DEPLOYED_URL;
 //axios.defaults.withCredentials = true;
 const useFetch = (url: string) => {
   const { token } = useToken();

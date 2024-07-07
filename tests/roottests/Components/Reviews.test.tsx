@@ -15,8 +15,6 @@ describe('ProductDetails Component', () => {
         </MemoryRouter>
       </Provider>,
     );
-    expect(
-      screen.getByText(/Add Review/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Add Review/i)).toBeInTheDocument();
   });
 });

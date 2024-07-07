@@ -1,5 +1,5 @@
-import { FaBell } from 'react-icons/fa';
-function Navbar() {
+import NotificationPanel from './NotificationPanel';
+function UserNavbar() {
   return (
     <nav>
       <header className="flex border w-full items-center justify-between h-16 px-4 border-b shrink-0 md:px-6">
@@ -9,10 +9,7 @@ function Navbar() {
         </div>
         <div className="flex items-center gap-x-8">
           {/* <!-- notifcation icon --> */}
-          <button>
-            <FaBell />
-          </button>
-
+          <NotificationPanel />
           <button
             className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full"
             type="button"
@@ -35,4 +32,4 @@ function Navbar() {
     </nav>
   );
 }
-export default Navbar;
+export default UserNavbar;

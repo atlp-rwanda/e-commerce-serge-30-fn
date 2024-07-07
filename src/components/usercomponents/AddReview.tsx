@@ -4,7 +4,7 @@ import { useAddReviewMutation } from '../../service/productApi';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { reviewSchema } from '../../utils/validations/reviews.validation';
-import { Review }  from './reviews'
+import { Review } from './reviews';
 import { ZodError } from 'zod';
 
 interface AddReviewProps {
@@ -18,7 +18,10 @@ interface ErrorResponse {
   };
 }
 
-export const AddReview: React.FC<AddReviewProps> = ({ onReviewAdded, hasReviews }) => {
+export const AddReview: React.FC<AddReviewProps> = ({
+  onReviewAdded,
+  hasReviews,
+}) => {
   const { productId } = useParams<{ productId: string }>();
   const [reviewTitle, setReviewTitle] = useState<string>('');
   const [reviewContent, setReviewContent] = useState<string>('');
@@ -53,7 +56,9 @@ export const AddReview: React.FC<AddReviewProps> = ({ onReviewAdded, hasReviews 
       if (response.data && response.data.success) {
         const newReview = response.data.review;
         onReviewAdded(newReview);
-        toast.success('Review added successfully!', { toastId: 'success-toast' });
+        toast.success('Review added successfully!', {
+          toastId: 'success-toast',
+        });
         setReviewTitle('');
         setReviewContent('');
         setRating(0);
@@ -61,7 +66,6 @@ export const AddReview: React.FC<AddReviewProps> = ({ onReviewAdded, hasReviews 
         if (!hasReviews) {
           window.location.reload();
         }
-        
       } else {
         let errorMessage = 'Failed to add review';
         const error = response.error;

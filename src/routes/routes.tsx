@@ -12,6 +12,7 @@ import BillingDetails from '../components/usercomponents/BillingDetails';
 import PaymentSuccess from '../components/usercomponents/PaymentSuccess';
 import PaymentFailure from '../components/usercomponents/PaymentFailure';
 import PaymentsPage from '../pages/userPages/PaymentList';
+import { NotificationPage } from '../pages/userPages/NotificationPage';
 import Cart from '../pages/rootpages/Cart';
 import { ProductDetails } from '../components/rootcomponents/ProductDetails';
 import * as userPages from '../pages/userPages';
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
     element: <Layouts.UserLayout />,
     children: [
       { path: 'me', element: <authPages.UserSettings /> },
+      {
+        path: 'notifications',
+        element: <NotificationPage />,
+      },
       { path: 'orders/all', element: <userPages.OrderPage /> },
       { path: 'orders/:id', element: <userPages.SingleOrder /> },
     ],

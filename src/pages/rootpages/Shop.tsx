@@ -26,14 +26,13 @@ export default function Shop() {
   return (
     <div>
       <div className="flex bg-[#fafafa] max-md:flex-col">
-        <SideBarFilter
-          filteredData={filteredData}
-          getError={getError}
-        />
+        <SideBarFilter filteredData={filteredData} getError={getError} />
         {isLoading ? (
-         <SkeletonProduct />
+          <SkeletonProduct />
         ) : isError ? (
-          <h1 className="text-red-700 self-center ml-72 text-2xl max-md:m-20">{error}</h1>
+          <h1 className="text-red-700 self-center ml-72 text-2xl max-md:m-20">
+            {error}
+          </h1>
         ) : (
           <AllProducts products={dataToDisplay} />
         )}

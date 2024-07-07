@@ -55,7 +55,7 @@ describe('Search Bar', () => {
         </MemoryRouter>
       </Provider>,
     );
-    const autoComplete = screen.queryByTestId('autoComplete')
-    expect(autoComplete).toBeNull()
+    const autoComplete = screen.queryByTestId('autoComplete');
+    expect(autoComplete).toBeNull();
   });
 });

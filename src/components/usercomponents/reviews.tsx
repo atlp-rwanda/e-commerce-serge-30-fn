@@ -131,7 +131,10 @@ export const ProductReviews: React.FC = () => {
         </div>
       )}
 
-      <AddReview onReviewAdded={handleReviewAdded} hasReviews={reviews.length > 0} />
+      <AddReview
+        onReviewAdded={handleReviewAdded}
+        hasReviews={reviews.length > 0}
+      />
     </>
   );
 };
