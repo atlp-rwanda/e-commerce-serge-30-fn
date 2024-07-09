@@ -4,6 +4,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import ProductItem from '../../src/pages/vendorpages/ProductItem'; // Adjust the path as needed
 import { IProduct } from '../../src/types/Product.types'; // Adjust the path as needed
+import { Provider } from 'react-redux';
+import { store } from '../../src/redux/store';
 // Mocking the useLocation hook
 
 describe('ProductItem UI component', () => {
@@ -46,11 +48,13 @@ describe('ProductItem UI component', () => {
 
   const renderComponent = () => {
     return render(
-      <MemoryRouter initialEntries={[{ state: product }]}>
-        <Routes>
-          <Route path="/" element={<ProductItem />} />
-        </Routes>
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[{ state: product }]}>
+          <Routes>
+            <Route path="/" element={<ProductItem />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>,
     );
   };
 

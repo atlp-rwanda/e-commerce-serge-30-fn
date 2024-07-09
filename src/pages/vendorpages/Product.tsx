@@ -51,7 +51,7 @@ const Product: React.FC = () => {
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <ActionButton
           text="Add product"
-          colorClasses="bg-slate-800 text-white"
+          colorClasses="bg-slate-800 text-white px-6 py-2"
           IconComponent={FaPlus}
         />
       </div>
