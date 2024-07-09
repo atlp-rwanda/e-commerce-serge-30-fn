@@ -2,9 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import RoleModal from './RoleModal';
 import { IUser } from '../../../types';
-import { useAssignRoleMutation } from '../../../service/authApi';
+import {
+  useAssignRoleMutation,
+  useDisableAccountMutation,
+} from '../../../service/authApi';
 import { ColorRing } from 'react-loader-spinner';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Button } from '../../rootcomponents/Button';
 
 interface ActionButtonProps {
@@ -13,13 +16,22 @@ interface ActionButtonProps {
   refreshUsers: () => void;
 }
 
+interface ErrorResponse {
+  status: number;
+  data: {
+    message: string;
+  };
+}
+
 const ActionButton = ({ activeRole, refreshUsers, id }: ActionButtonProps) => {
   const [dropdownActive, setDropdownActive] = useState(false);
   const [modalActive, setModalActive] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [users, setUsers] = useState<IUser>();
   const [token, setToken] = useState<string | null>();
-  const [assignRole, { isLoading }] = useAssignRoleMutation();
+  const [assignRole, { isLoading: isAssignLoading }] = useAssignRoleMutation();
+  const [disableAccount, { isLoading: isDisableLoading }] =
+    useDisableAccountMutation();
 
   const handleAction = () => {
     setDropdownActive(!dropdownActive);
@@ -59,12 +71,10 @@ const ActionButton = ({ activeRole, refreshUsers, id }: ActionButtonProps) => {
   };
 
   const handleAssignRole = async (role: string) => {
-    console.log(`Assigned role: ${role}`);
     role.toLowerCase();
     setModalActive(false);
     if (users && token) {
       const response = await assignRole({ id, token, role });
-      console.log(response);
       if (response.data) {
         toast.success('Assigned Role successfully');
         refreshUsers();
@@ -75,10 +85,34 @@ const ActionButton = ({ activeRole, refreshUsers, id }: ActionButtonProps) => {
     }
   };
 
+  const handleDisableUser = async () => {
+    setDropdownActive(false);
+    if (token && id) {
+      try {
+        const response = await disableAccount({ id, token }).unwrap();
+        if (response.message === 'User account disabled successfully') {
+          toast.success(response.message);
+          refreshUsers();
+        } else {
+          toast.error(response.message);
+        }
+      } catch (error) {
+        let errorMessage = 'An error occurred. Please try again.';
+        if (error && typeof error === 'object' && 'data' in error) {
+          const err = error as ErrorResponse;
+          if (err.data?.message) {
+            errorMessage = err.data.message;
+          }
+        }
+        toast.error(errorMessage);
+      }
+    }
+  };
+
+  const isLoading = isAssignLoading || isDisableLoading;
+
   return (
     <div className="relative inline-block text-left" ref={dropdownRef}>
-      <ToastContainer />
-
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center z-50 bg-white bg-opacity-50">
           <ColorRing
@@ -112,7 +146,7 @@ const ActionButton = ({ activeRole, refreshUsers, id }: ActionButtonProps) => {
             </Button>
 
             <Button
-              onClick={() => refreshUsers()}
+              onClick={handleDisableUser}
               className="w-full text-left px-4 py-2 text-sm bg-red-500 text-white hover:bg-red-700"
             >
               Disable

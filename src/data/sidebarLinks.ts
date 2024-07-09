@@ -4,14 +4,14 @@ import { IoBagHandleOutline } from 'react-icons/io5';
 import { MdStarOutline, MdOutlineNotificationsActive } from 'react-icons/md';
 import React from 'react';
 
-type SidebarLink = {
+export type UserSidebarLink = {
   id: number;
   name: string;
   icon: React.ComponentType<{ className?: string }>;
   link: string;
 };
 
-export const sidebarLinks: SidebarLink[] = [
+export const sidebarLinks: UserSidebarLink[] = [
   {
     id: 1,
     name: 'Dashboard',

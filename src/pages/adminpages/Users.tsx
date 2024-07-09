@@ -14,13 +14,14 @@ import { IUser } from '../../types';
 import { ErrorPage } from '../../utils/ErrorPage';
 import { Loading } from '../../utils/Loading';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 const Users: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const usersPerPage: number = 8;
   const { data, isLoading, error, mutate } = useFetch('/api/v1/users');
   const isAuthenticated = useSelector(
-    (state: RootState) => state.user.isAuthenticated,
+    (state: RootState) => state.user?.user?.role === "ADMIN",
   );
   const navigate = useNavigate();
   const refreshUsers = () => {
@@ -30,9 +31,8 @@ const Users: React.FC = () => {
     refreshUsers();
   }, [data]);
   useEffect(() => {
-    console.log(isAuthenticated);
     if (!isAuthenticated) {
-      navigate('/auth/login');
+      navigate('/');
     }
   }, []);
 
@@ -65,6 +65,7 @@ const Users: React.FC = () => {
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>
       <main>
+      <ToastContainer />
         <table className="min-w-full border bg-white">
           <TableHeader />
           <TableBody
