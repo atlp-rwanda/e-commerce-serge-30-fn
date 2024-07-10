@@ -104,6 +104,31 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         },
       }),
     }),
+    getAllProducts: builder.query({
+      query: () => ({
+        url: `api/v1/products/list`,
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    }),
+    viewCart: builder.query({
+      query: () => ({
+        url: `api/v1/cart/viewcart`,
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    }),
+    addToCart: builder.mutation<
+      { message: string },
+      { productid: string; quantity: number }
+    >({
+      query: ({ productid, quantity }) => ({
+        url: `api/v1/cart/addtocart`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: { productid, quantity },
+      }),
+    }),
     assignRole: builder.mutation<
       { message: string },
       { id: string; token: string; role: string }
@@ -120,7 +145,7 @@ const authApi = ecommerceSergeApi.injectEndpoints({
     }),
     disableAccount: builder.mutation<
       { message: string },
-      { id: string; token: string; }
+      { id: string; token: string }
     >({
       query: ({ id, token }) => ({
         url: `api/v1/admin/disable/${id}`,
@@ -171,6 +196,8 @@ export const {
   useAssignRoleMutation,
   useDisableAccountMutation,
   useUserProfileQuery,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useGetAllProductsQuery,
+  useAddToCartMutation,
+  useViewCartQuery,
 } = authApi;
-

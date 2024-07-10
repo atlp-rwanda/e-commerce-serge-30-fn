@@ -14,7 +14,7 @@ export function LoginPage() {
   return (
     <div className="flex justify-between bg-white">
       <div
-        className=" w-full max-tablet:hidden bg-cover bg-center h-screen"
+        className=" w-1/2 max-tablet:hidden bg-cover bg-center h-screen"
         style={{ backgroundImage: `url(${logInImage})` }}
       ></div>
       <div className="w-screen lg:w-1/2  h-screen flex justify-center items-center">

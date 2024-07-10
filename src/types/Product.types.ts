@@ -31,3 +31,18 @@ export interface IProduct {
     updatedAt: string;
   };
 }
+export interface CartProduct {
+  product_id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image_url: string[];
+}
+
+export interface CartItem {
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+  images: string[];
+}

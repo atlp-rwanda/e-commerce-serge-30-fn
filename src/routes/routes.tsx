@@ -9,6 +9,8 @@ import { ResetPassword } from '../pages/authpages/ResetPassword';
 import AllProducts from '../pages/rootpages/AllProducts';
 import { Product, ProductItem } from '../pages/vendorpages';
 
+import Cart from '../pages/rootpages/Cart';
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -17,7 +19,7 @@ export const router = createBrowserRouter([
       { index: true, element: <Pages.HomePage /> },
       { path: '/new', element: <Pages.AddProducts /> },
       { path: '/shop', element: <AllProducts /> },
-
+      { path: '/cart', element: <Cart /> },
       { path: '*', element: <Pages.NotFoundPage /> },
     ],
   },
