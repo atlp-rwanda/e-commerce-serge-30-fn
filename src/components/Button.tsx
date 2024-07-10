@@ -3,14 +3,17 @@ interface ButtonEl {
   title: string;
   bgColor?: string;
   children: string;
+  className?: string;
+  onClick?: () => void;
 }
 
-const Button = ({ type, title, children }: ButtonEl) => {
+const Button = ({ type, title, children, className, onClick }: ButtonEl) => {
   return (
     <button
       type={type}
       title={title}
-      className={`bg-black rounded-[8px] w-[60%] text-white border border-[#E0E0E0] py-2 px-4 box-border text-[828282] hover:opacity-90`}
+      onClick={onClick}
+      className={`bg-black rounded-[8px] w-[60%] text-white border border-[#E0E0E0] py-2 px-4 box-border text-[828282] hover:opacity-90 ${className}`}
     >
       {children}
     </button>

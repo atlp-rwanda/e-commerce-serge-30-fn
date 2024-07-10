@@ -9,3 +9,5 @@ export * from './authpages/VerificationFailed';
 export * from './authpages/VerificationPage';
 export * from './userpage/userSettings';
 export * from './authpages/RequestPwdChangePage';
+export * from './authpages/SignupPage';
+export * from './vendorpages/addProducts';

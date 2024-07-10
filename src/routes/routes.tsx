@@ -1,38 +1,31 @@
 import { createBrowserRouter } from 'react-router-dom';
 import * as authPages from '../../src/pages/index';
-import {
-  AdminLayout,
-  AuthLayout,
-  RootLayout,
-  UserLayout,
-  VendorLayout,
-} from '../layouts';
-import { HomePage, LoginPage, NotFoundPage } from '../pages';
+import * as Layouts from '../layouts/index';
+import * as Pages from '../pages/index';
 import { Users } from '../pages/adminpages/index';
 import TwoFactorAuth from '../pages/auth/TwoFactorAuth';
 import { ForgotPassword } from '../pages/authpages/ForgotPassword';
 import { ResetPassword } from '../pages/authpages/ResetPassword';
 import AllProducts from '../pages/rootpages/AllProducts';
-import NewProduct from '../pages/rootpages/NewProduct';
 import { Product, ProductItem } from '../pages/vendorpages';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: <Layouts.RootLayout />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: '/new', element: <NewProduct /> },
+      { index: true, element: <Pages.HomePage /> },
+      { path: '/new', element: <Pages.AddProducts /> },
       { path: '/shop', element: <AllProducts /> },
 
-      { path: '*', element: <NotFoundPage /> },
+      { path: '*', element: <Pages.NotFoundPage /> },
     ],
   },
   {
     path: 'auth',
-    element: <AuthLayout />,
+    element: <Layouts.AuthLayout />,
     children: [
-      { path: 'login', index: true, element: <LoginPage /> },
+      { path: 'login', index: true, element: <Pages.LoginPage /> },
       { path: 'reset-password/:token', element: <ResetPassword /> },
       { path: 'forgotPassword', element: <ForgotPassword /> },
       { path: 'two-factor-auth', element: <TwoFactorAuth /> },
@@ -44,12 +37,12 @@ export const router = createBrowserRouter([
   },
   {
     path: 'user',
-    element: <UserLayout />,
+    element: <Layouts.UserLayout />,
     children: [{ path: 'me', element: <authPages.UserSettings /> }],
   },
   {
     path: 'vendor',
-    element: <VendorLayout />,
+    element: <Layouts.VendorLayout />,
     children: [
       {
         path: 'products',
@@ -59,11 +52,15 @@ export const router = createBrowserRouter([
         path: 'products/:id',
         element: <ProductItem />,
       },
+      {
+        path: 'products/new',
+        element: <Pages.AddProducts />,
+      },
     ],
   },
   {
     path: 'admin',
-    element: <AdminLayout />,
+    element: <Layouts.AdminLayout />,
     children: [{ path: 'users', element: <Users /> }],
   },
 ]);
