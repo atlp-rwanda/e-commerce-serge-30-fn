@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
   {
     path: 'user',
     element: <UserLayout />,
-    children: [{ path: 'usersettings', element: <authPages.UserSettings /> }],
+    children: [{ path: 'me', element: <authPages.UserSettings /> }],
   },
   {
     path: 'vendor',

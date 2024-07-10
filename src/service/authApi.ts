@@ -1,4 +1,37 @@
 import { ecommerceSergeApi } from './index';
+interface Profile {
+  birthdate: string;
+  createdAt: string;
+  email: string;
+  gender: string;
+  id: string;
+  location: string;
+  preferred_currency: string;
+  preferred_language: string;
+  updatedAt: string;
+  userId: string;
+  username: string;
+}
+interface User {
+  active: boolean;
+  createdAt: string;
+  email: string;
+  emailVerificationToken: string;
+  emailVerificationTokenExpiration: string;
+  firstname: string;
+  google_id: string | null;
+  google_token: string | null;
+  image_url: string | null;
+  lastname: string;
+  resetToken: string | null;
+  resetTokenExpiration: string | null;
+  role: 'ADMIN' | 'USER' | 'VENDOR';
+  updatedAt: string;
+  user_id: string;
+  username: string;
+  verified: boolean;
+  profile: Profile;
+}
 const authApi = ecommerceSergeApi.injectEndpoints({
   endpoints: (builder) => ({
     loginUser: builder.mutation({
@@ -98,6 +131,33 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         },
       }),
     }),
+    userProfile: builder.query<User, void>({
+      query: () => {
+        const token = localStorage.getItem('token');
+        return {
+          url: 'api/v1/users/profile',
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${token}`,
+          },
+        };
+      },
+    }),
+    updateProfile: builder.mutation<User, Partial<Profile>>({
+      query: (updatedProfile) => {
+        const token = localStorage.getItem('token');
+        return {
+          url: 'api/v1/users/profile',
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${token}`,
+          },
+          body: updatedProfile,
+        };
+      },
+    }),
   }),
 });
 export const {
@@ -110,4 +170,7 @@ export const {
   useUpdatePasswordMutation,
   useAssignRoleMutation,
   useDisableAccountMutation,
+  useUserProfileQuery,
+  useUpdateProfileMutation
 } = authApi;
+

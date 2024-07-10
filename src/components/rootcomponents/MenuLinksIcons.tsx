@@ -1,9 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+
 interface MenuLinkIconProp {
   menuActive?: boolean;
   className?: string;
 }
 
 const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('user');
+  };
   return (
     <div className={className}>
       {' '}
@@ -55,6 +61,7 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
+        onDoubleClick={handleClick}
         className={`size-6 w-6 h-6 ${menuActive && 'w-12 h-12'}`}
       >
         <path
