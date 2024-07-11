@@ -31,6 +31,7 @@ export interface IProduct {
     updatedAt: string;
   };
 }
+
 export interface CartProduct {
   product_id: string;
   name: string;

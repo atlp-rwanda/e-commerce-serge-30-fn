@@ -11,3 +11,6 @@ export * from './rootcomponents/Sidebar';
 export * from './rootcomponents/RequestPwdChangeForm';
 export * from './vendorcomponents/DeleteProduct';
 export * from './ToastMessage';
+export * from './vendorcomponents/ActionButton';
+export * from './rootcomponents/AddToWishlist';
+export * from './rootcomponents/WishlistButton';

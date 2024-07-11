@@ -2,7 +2,6 @@ import { ecommerceSergeApi } from './index';
 import { IProduct } from '../types';
 import { Category } from '../types/category.types';
 
-
 const productApi = ecommerceSergeApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProducts: builder.query<
@@ -60,6 +59,26 @@ const productApi = ecommerceSergeApi.injectEndpoints({
         },
       }),
     }),
+    addProductToWishlist: builder.mutation({
+      query: ({ product_id, token }) => ({
+        url: `api/v1/wishlist/${product_id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      }),
+    }),
+    getWishlist: builder.mutation({
+      query: (token) => ({
+        url: `api/v1/wishlist`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      }),
+    }),
     addReview: builder.mutation({
       query: ({ product_id, token, review }) => ({
         url: `api/v1/buyer/review/${product_id}`,
@@ -81,5 +100,7 @@ export const {
   useDeleteProductMutation,
   useGetProductByIdMutation,
   useGetProductReviewsMutation,
+  useAddProductToWishlistMutation,
+  useGetWishlistMutation,
   useAddReviewMutation,
 } = productApi;
