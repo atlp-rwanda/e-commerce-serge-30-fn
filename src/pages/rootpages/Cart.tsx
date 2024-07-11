@@ -6,6 +6,7 @@ import OrderSummary from '../../components/rootcomponents/OrderSummary';
 import { TableBody } from '../../components/rootcomponents/TableBody';
 import TableHeader from '../../components/rootcomponents/TableHeader';
 import { useViewCartQuery } from '../../service/authApi';
+import { ClearCart } from '../../components/usercomponents/ClearCart';
 import { IUser } from '../../types';
 import { toast } from 'react-toastify';
 const Cart: React.FC = () => {
@@ -69,7 +70,10 @@ const Cart: React.FC = () => {
     <div className="bg-[#FAFAFA] font-outfit">
       <div className="flex justify-between gap-10 p-2 rounded-md m-10 max-tablet:flex-col">
         <div className="bg-white flex-1">
-          <h1 className="px-4 py-2">Shopping Cart</h1>
+          <div className="flex flex-1 justify-between items-center w-[29.7rem] py-4">
+            <h1 className="px-4 py-2">Shopping Cart</h1>
+            <ClearCart customClasses="bg-red-500 py-1 px-2 rounded flex items-center transition duration-150 ease-in-out" />
+          </div>
           <TableHeader />
           <TableBody products={cartItems} />
         </div>
