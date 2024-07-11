@@ -6,6 +6,7 @@ import Footer from '../../components/rootcomponents/Footer';
 import HomeReviews from '../../components/rootcomponents/HomeReviews';
 import FeaturesSection from '../../components/rootcomponents/FeatureSection';
 import MoreServices from '../../components/rootcomponents/MoreServices';
+import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { setToken, setUser } from '../../redux/features/auth/authSlice';
@@ -42,7 +43,7 @@ export function HomePage() {
           </h1>
           <button className=" group bg-black text-white p-2 px-4 rounded-sm mt-12 max-tablet:mt-6 ">
             <div className="flex gap-2 ">
-              <span>Shop Now</span>
+              <Link to="/shop">Shop Now</Link>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

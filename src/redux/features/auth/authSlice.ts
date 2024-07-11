@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { JwtPayload } from 'jwt-decode';
+import { RootState } from '../../store';
 interface User {
   active: boolean;
   createdAt: string;
@@ -69,5 +70,6 @@ export interface CustomJwtPayload extends JwtPayload {
 }
 export const { setToken, setUser, clearUserData, setAuthentication } =
   userSlice.actions;
+export const selectToken = (state: RootState) => state.user.token;
 
 export default userSlice.reducer;

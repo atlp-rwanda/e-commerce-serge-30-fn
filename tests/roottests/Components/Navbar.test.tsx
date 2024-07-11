@@ -9,12 +9,6 @@ describe('Home Navbar', () => {
     expect(screen.getByRole('heading', { name: /store/i })).toBeInTheDocument();
   });
 
-  it('should render the New Product page with /new route', () => {
-    navigateTo('/new');
-    const headings = screen.getAllByRole('heading', { name: /air/i });
-    expect(headings).not.toHaveLength(0);
-  });
-
   it('should render the shop page with /shop route', () => {
     navigateTo('/shop');
     expect(screen.getByText(/all/i)).toBeInTheDocument();

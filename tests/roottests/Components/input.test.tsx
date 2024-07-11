@@ -10,7 +10,7 @@ describe('Input Component', () => {
     render(<Input placeholder="Enter text" />);
 
     const input = screen.getByPlaceholderText('Enter text');
-    
+
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('type', 'text');
   });
@@ -19,7 +19,7 @@ describe('Input Component', () => {
     render(<Input type="email" name="email" value="test@example.com" />);
 
     const input = screen.getByDisplayValue('test@example.com');
-    
+
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute('type', 'email');
     expect(input).toHaveAttribute('name', 'email');
@@ -36,7 +36,7 @@ describe('Input Component', () => {
   it('forwards ref to the input element', () => {
     const ref = React.createRef<HTMLInputElement>();
     render(<Input ref={ref} />);
-    
+
     const input = screen.getByRole('textbox');
 
     expect(ref.current).toBe(input);
