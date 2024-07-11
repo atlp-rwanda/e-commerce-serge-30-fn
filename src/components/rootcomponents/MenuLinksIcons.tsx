@@ -6,7 +6,7 @@ import { BsBagCheck } from 'react-icons/bs';
 import { CiStar } from 'react-icons/ci';
 import { CiLogout } from 'react-icons/ci';
 import { useToken } from '../../hooks/useToken';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 interface MenuLinkIconProp {
   menuActive?: boolean;
@@ -66,13 +66,14 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
   const handleCart = () => {
     if (!user) {
       toast.error(' Not Logged In');
-      navigate('/');
+      setTimeout(() => {
+        navigate('/auth/login');
+      }, 2000);   
       return;
     }
   };
   return (
     <div className={className}>
-      <ToastContainer />
       <div className="relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"

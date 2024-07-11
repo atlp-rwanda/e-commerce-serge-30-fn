@@ -8,28 +8,27 @@ import '../../src/service/productsApi';
 
 import { vi } from 'vitest';
 
-import { useGetAllCategoriesMutation } from '../../src/service/categoriesApi';
+import { useGetAllCategoriesQuery } from '../../src/service/productApi';
 import { useCreateProductMutation } from '../../src/service/productsApi';
 
-vi.mock('../../src/service/categoriesApi', () => ({
-  useGetAllCategoriesMutation: vi.fn(),
+vi.mock('../../src/service/productApi', () => ({
+  useGetAllCategoriesQuery: vi.fn(),
 }));
 
 vi.mock('../../src/service/productsApi', () => ({
   useCreateProductMutation: vi.fn(),
 }));
 
-const mockGetAllCategories = useGetAllCategoriesMutation as jest.Mock;
+const mockGetAllCategories = useGetAllCategoriesQuery as jest.Mock;
 const mockCreateProduct = useCreateProductMutation as jest.Mock;
 
 describe('AddProducts Component', () => {
   beforeEach(() => {
-    mockGetAllCategories.mockReturnValue([
-      vi.fn().mockResolvedValue({
-        data: { data: [{ name: 'Category1' }, { name: 'Category2' }] },
-      }),
-      { isLoading: false, isError: false },
-    ]);
+    mockGetAllCategories.mockReturnValue({
+      data: { data: [{ name: 'Category1' }, { name: 'Category2' }] },
+      isLoading: false,
+      isError: false,
+    });
 
     mockCreateProduct.mockReturnValue([
       vi.fn().mockResolvedValue({ data: { success: true } }),

@@ -1,23 +1,23 @@
 import { Link } from 'react-router-dom';
+import notFoundImage from '../assets/404image.png';
+import Footer from '../components/rootcomponents/Footer';
 
 export function NotFoundPage() {
   return (
-    <div className="flex flex-col items-center h-screen">
-      <div className="w-7/12 my-12">
-        <img
-          src={'/404.svg'}
-          className="h-[60vh] w-full object-cover"
-          alt="not found"
-        />
+    <>
+      <div className="flex flex-col items-center justify-center space-y-2 relative">
+        <h1 className="text-4xl font-semibold absolute top-5">
+          404 - Page Not Found
+        </h1>
+        <img src={notFoundImage} />
+        <Link
+          to="/"
+          className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+        >
+          Back to Home
+        </Link>
       </div>
-
-      <h1 className="text-4xl mb-4">404 - Page Not Found</h1>
-      <Link
-        to="/"
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Back to Home
-      </Link>
-    </div>
+      <Footer />
+    </>
   );
 }

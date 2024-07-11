@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components';
 import Footer from '../../components/rootcomponents/Footer';
@@ -6,15 +6,29 @@ import OrderSummary from '../../components/rootcomponents/OrderSummary';
 import { TableBody } from '../../components/rootcomponents/TableBody';
 import TableHeader from '../../components/rootcomponents/TableHeader';
 import { useViewCartQuery } from '../../service/authApi';
-
+import { IUser } from '../../types';
+import { toast } from 'react-toastify';
 const Cart: React.FC = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const navigate = useNavigate();
+  const toastShownRef = useRef(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-    setAuthenticated(!!token && !!user);
+    const userString = localStorage.getItem('user');
+    if (token && userString) {
+      const user: IUser = JSON.parse(userString);
+      setAuthenticated(true);
+      if (user.role === 'ADMIN' || user.role === 'VENDOR') {
+        navigate('/');
+        setTimeout(() => {
+          if (!toastShownRef.current) {
+            toast.dark('Cart is for buyers only');
+            toastShownRef.current = true;
+          }
+        }, 500);
+      }
+    }
   }, []);
   const {
     data: items,

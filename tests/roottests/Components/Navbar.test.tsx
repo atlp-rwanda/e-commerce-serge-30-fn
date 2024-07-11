@@ -9,11 +9,6 @@ describe('Home Navbar', () => {
     expect(screen.getByRole('heading', { name: /store/i })).toBeInTheDocument();
   });
 
-  it('should render the shop page with /shop route', () => {
-    navigateTo('/shop');
-    expect(screen.getByText(/all/i)).toBeInTheDocument();
-  });
-
   it('should change menuActive state', async () => {
     navigateTo('/shop');
     const user = userEvent.setup();

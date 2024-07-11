@@ -2,6 +2,7 @@ import { useState } from 'react';
 import logoImage from '../../assets/Group 1000005934.png';
 import MenuLinks from '../rootcomponents/MenuLinks';
 import MenuLinksIcons from '../rootcomponents/MenuLinksIcons';
+import SearchBar from './searchComponents/SearchBar';
 
 const NavBar = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -23,32 +24,7 @@ const NavBar = () => {
         <div
           className={`links text-black flex items-center gap-4 ${menuActive ? 'max-tablet:flex max-tablet:flex-col max-tablet:z-10 max-tablet:absolute max-tablet:right-20 max-tablet:pt-96 max-tablet:mt-56 max-tablet:pr-40 max-tablet:text-lg max-tablet:text-left max-tablet:items-baseline' : ''} max-tablet:hidden`}
         >
-          <div
-            className={`flex items-center border border-slate-400 rounded-md ${menuActive && 'max-tablet:hidden'}`}
-          >
-            <input
-              type="search"
-              name=""
-              id=""
-              placeholder="Search Product"
-              className="p-2 text-sm placeholder:text-sm outline-none"
-            />
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-              />
-            </svg>
-          </div>
+          <SearchBar menuActive={menuActive} />
           <MenuLinksIcons menuActive={menuActive} className="flex gap-4" />
         </div>
         <div className="tablet:hidden relative z-50" onClick={handleMenu}>

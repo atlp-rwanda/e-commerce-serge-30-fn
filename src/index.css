@@ -8,3 +8,7 @@
 .active {
   @apply bg-slate-700 rounded-md text-white;
 }
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0;
+}
+
