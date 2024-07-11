@@ -6,13 +6,14 @@ import {
   FaTags,
   FaEdit,
 } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IProduct } from '../../types';
 import { ErrorPage } from '../../utils/ErrorPage';
 import { ActionButton } from '../../components/vendorcomponents/ActionButton';
 import * as vendorComponents from '../../components/index';
 
 const ProductItem: React.FC = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [selectedImage, setSelectedImage] = useState<string>(''); // Initialize with empty string
 
@@ -25,6 +26,11 @@ const ProductItem: React.FC = () => {
     setSelectedImage(product.image_url[0]);
   }
 
+  const handleUpdateClick = () => {
+    navigate(`/vendor/products/${product.product_id}/update`, {
+      state: product,
+    });
+  };
   const handleImageClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);
   };
@@ -100,7 +106,7 @@ const ProductItem: React.FC = () => {
               text="Update."
               colorClasses="bg-blue-600 px-6 py-2 hover:bg-blue-700 text-white"
               IconComponent={FaEdit}
-              onClick={() => console.log('Update clicked')}
+              onClick={handleUpdateClick}
             />
             <vendorComponents.DeleteProduct
               product_id={product.product_id}

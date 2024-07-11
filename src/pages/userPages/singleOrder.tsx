@@ -1,11 +1,11 @@
 import { useParams, useLocation, Link } from 'react-router-dom';
 import {
   Clock,
-  Truck,
   CheckCircle,
   ArrowsCounterClockwise,
   Info,
 } from '@phosphor-icons/react';
+import { FaTruck } from 'react-icons/fa';
 import { Puff } from 'react-loader-spinner';
 import { useGetSingleOrderQuery } from '../../service/OrderApi';
 import { useEffect, useState } from 'react';
@@ -73,7 +73,7 @@ export function SingleOrder() {
   return (
     <div data-testid="container-of-singleOrder" className="flex flex-col p-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-neutral-400">Order #{currentOrder?.id.toString().slice(0,3)}</h1>
+        <h1 className="text-3xl font-bold text-neutral-400">Order #{currentOrder?.id.toString().slice(0, 3)}</h1>
         <Link
           to="/customer-support"
           className="hover:text-neutral-400 self-end px-4 py-2"
@@ -143,7 +143,7 @@ export function SingleOrder() {
           )}
           {shipped && (
             <>
-              <Truck size={48} />
+              <FaTruck size={48} />
               <span className="text-blue-500 text-2xl">Shipped</span>
             </>
           )}
