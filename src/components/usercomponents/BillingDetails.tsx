@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button } from '../../components';
-import { useCreateOrderMutation } from '../../service/OrderApi';
+import {
+  useCreateOrderMutation,
+  useCreatePaymentSessionMutation,
+} from '../../service/OrderApi';
 import { Label } from '../rootcomponents/Label';
 import { ToastContainer, toast } from 'react-toastify';
 import {
@@ -29,9 +32,16 @@ const BillingDetails: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [createOrder, { isLoading, isSuccess, isError, error }] =
-    useCreateOrderMutation();
+  const [
+    createOrder,
+    { isLoading: isCreatingOrder, isSuccess, isError, error },
+  ] = useCreateOrderMutation();
+
+  const [createPaymentSession] = useCreatePaymentSessionMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -53,6 +63,12 @@ const BillingDetails: React.FC = () => {
     }));
   };
 
+  const handlePaymentMethodChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setSelectedPaymentMethod(e.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -68,8 +84,8 @@ const BillingDetails: React.FC = () => {
       return;
     }
 
-    if (!isLoading) {
-      createOrder({
+    if (!isCreatingOrder) {
+      const result = await createOrder({
         shipping_address: {
           address: formData.address,
           city: formData.city,
@@ -78,6 +94,22 @@ const BillingDetails: React.FC = () => {
         },
         ...formData,
       });
+
+      if (result.data && selectedPaymentMethod === 'Bank') {
+        setIsLoading(true);
+        const orderId = result.data.data.id;
+
+        // Initiate payment
+        const paymentResult = await createPaymentSession({ orderId });
+        console.log(paymentResult.data.session.url);
+
+        if (paymentResult.data) {
+          window.location.href = paymentResult.data.session.url;
+        } else {
+          toast.error('Error initiating payment');
+          setIsLoading(false);
+        }
+      }
     }
   };
 
@@ -182,8 +214,11 @@ const BillingDetails: React.FC = () => {
               name="paymentMethod"
               value="Bank"
               className="mr-2"
+              onChange={handlePaymentMethodChange}
             />
-            <label htmlFor="bank" className="text-gray-700">Bank</label>
+            <label htmlFor="bank" className="text-gray-700">
+              Bank
+            </label>
           </div>
           <div className="flex items-center">
             <input
@@ -192,16 +227,20 @@ const BillingDetails: React.FC = () => {
               name="paymentMethod"
               value="Mobile Money"
               className="mr-2"
+              onChange={handlePaymentMethodChange}
             />
-            <label htmlFor="mobileMoney" className="text-gray-700">Mobile Money</label>
+            <label htmlFor="mobileMoney" className="text-gray-700">
+              Mobile Money
+            </label>
           </div>
         </div>
         <Button
           type="submit"
           title="Place Order"
           className="mt-6 w-full bg-red-500 text-white p-3 rounded-md hover:bg-red-600"
+          disabled={isLoading || isCreatingOrder}
         >
-          Place Order
+          {isLoading ? 'Processing Payment...' : 'Place Order'}
         </Button>
       </form>
       <div className="mt-8 w-full">
@@ -249,4 +288,3 @@ const BillingDetails: React.FC = () => {
 };
 
 export default BillingDetails;
-

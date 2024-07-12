@@ -69,7 +69,23 @@ export interface IOrder {
   phone?: string;
   expected_delivery_date?: string;
 }
-  export interface IOrderResponse {
+export interface IOrderResponse {
   success: boolean;
   message: string;
+  data: {
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+    status: string;
+    address: string;
+    country: string;
+    city: string;
+    phone: string;
+    zipCode: string;
+    expectedDeliveryDate: string;
+    userId: string;
+    totalPrice: number;
+    cartId: string;
+    products: IProduct[];
+  };
 }
