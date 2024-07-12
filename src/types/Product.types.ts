@@ -47,3 +47,29 @@ export interface CartItem {
   quantity: number;
   images: string[];
 }
+export interface IOrderItem {
+  product_id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image_url: string[];
+}
+export interface IOrder {
+  user_id?: string;
+  total_amount?: number;
+  status?: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  payment_status?: 'pending' | 'completed' | 'failed';
+  payment_method?: string;
+  shipping_address?: {
+    address: string;
+    city: string;
+    country: string;
+    zip_code: string;
+  };
+  phone?: string;
+  expected_delivery_date?: string;
+}
+  export interface IOrderResponse {
+  success: boolean;
+  message: string;
+}

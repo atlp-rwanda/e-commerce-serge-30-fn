@@ -4,21 +4,19 @@ import { Provider } from 'react-redux';
 import { store } from '../../src/redux/store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
-import '../../src/service/productsApi';
+import '../../src/service/productApi';
 
 import { vi } from 'vitest';
 
-import { useGetAllCategoriesQuery } from '../../src/service/productApi';
-import { useCreateProductMutation } from '../../src/service/productsApi';
-
 vi.mock('../../src/service/productApi', () => ({
   useGetAllCategoriesQuery: vi.fn(),
-}));
-
-vi.mock('../../src/service/productsApi', () => ({
   useCreateProductMutation: vi.fn(),
 }));
 
+import {
+  useGetAllCategoriesQuery,
+  useCreateProductMutation,
+} from '../../src/service/productApi';
 const mockGetAllCategories = useGetAllCategoriesQuery as jest.Mock;
 const mockCreateProduct = useCreateProductMutation as jest.Mock;
 
