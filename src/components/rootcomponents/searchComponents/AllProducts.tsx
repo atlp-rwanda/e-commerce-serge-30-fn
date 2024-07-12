@@ -1,6 +1,7 @@
 import { IProduct } from '../../../types';
 import StarIcon from '../StarIcon';
 import { AddToCartButton } from '../AddToCartButton';
+import { Link } from 'react-router-dom';
 
 export function AllProducts({ products }: { products: IProduct[] }) {
   return (
@@ -27,7 +28,9 @@ export function AllProducts({ products }: { products: IProduct[] }) {
                 />
               </div>
               <div className="px-4 py-2">
-                <h2 className="font-bold">{product.name}</h2>
+                <Link to={`/product/${product.product_id}`}>
+                  <h2 className="font-bold">{product.name}</h2>
+                </Link>
                 <h4 className="text-blue-900 font-medium py-2  transition-all ease-in-out group-hover:py-2">
                   save up to $ {product.discount}
                 </h4>
@@ -44,7 +47,7 @@ export function AllProducts({ products }: { products: IProduct[] }) {
                 <h2 className="font-bold py-2 group-hover:py-0">
                   ${product.price}
                 </h2>
-                <AddToCartButton product={product} />
+                <AddToCartButton product={product} hidden={true} />
               </div>
             </div>
           ))}

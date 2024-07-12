@@ -40,6 +40,37 @@ const productApi = ecommerceSergeApi.injectEndpoints({
         },
       }),
     }),
+    getProductById: builder.mutation({
+      query: ({ product_id, token }) => ({
+        url: `api/v1/product/${product_id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      }),
+    }),
+    getProductReviews: builder.mutation({
+      query: ({ product_id, token }) => ({
+        url: `api/v1/buyer/review/${product_id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      }),
+    }),
+    addReview: builder.mutation({
+      query: ({ product_id, token, review }) => ({
+        url: `api/v1/buyer/review/${product_id}`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        body: review,
+      }),
+    }),
   }),
 });
 
@@ -48,4 +79,7 @@ export const {
   useSearchProductsMutation,
   useGetAllCategoriesQuery,
   useDeleteProductMutation,
+  useGetProductByIdMutation,
+  useGetProductReviewsMutation,
+  useAddReviewMutation,
 } = productApi;

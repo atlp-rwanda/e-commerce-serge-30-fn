@@ -7,8 +7,14 @@ import { useToken } from '../../hooks/useToken';
 import { useNavigate } from 'react-router-dom';
 import ProductLoader from './ProductLoader';
 
-export const AddToCartButton: React.FC<{ product: IProduct }> = ({
+interface AddToCartButtonProps {
+  product: IProduct;
+  hidden?: boolean;
+}
+
+export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   product,
+  hidden = false,
 }) => {
   const { token, user } = useToken();
   const [addToCart, { isLoading: addtocartLoading }] = useAddToCartMutation();
@@ -52,7 +58,7 @@ export const AddToCartButton: React.FC<{ product: IProduct }> = ({
   return (
     <Button
       children="Buy Now"
-      className="hidden group-hover:block bg-black text-white py-2 px-6 rounded-sm w-full"
+      className={`flex items-center gap-2 px-4 py-2 bg-black text-white py-2 px-6 rounded-sm w-full ${hidden ? 'hidden group-hover:block' : ''}`}
       onClick={handleAddToCart}
     />
   );

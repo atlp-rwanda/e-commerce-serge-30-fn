@@ -31,6 +31,11 @@ export default {
         desktop: '1280px',
         // => @media (min-width: 1280px) { ... }
       },
+      height: {
+        '100': '26.25rem',
+        '120': '30rem',
+        '124': '31.25rem',
+      },
     },
   },
   plugins: [],
