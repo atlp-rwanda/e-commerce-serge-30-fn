@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components';
 import Footer from '../../components/rootcomponents/Footer';
 import OrderSummary from '../../components/rootcomponents/OrderSummary';
+import { ToastContainer } from 'react-toastify';
 import { TableBody } from '../../components/rootcomponents/TableBody';
 import TableHeader from '../../components/rootcomponents/TableHeader';
 import { useViewCartQuery } from '../../service/authApi';
@@ -68,11 +69,12 @@ const Cart: React.FC = () => {
 
   return (
     <div className="bg-[#FAFAFA] font-outfit">
+      <ToastContainer />
       <div className="flex justify-between gap-10 p-2 rounded-md m-10 max-tablet:flex-col">
         <div className="bg-white flex-1">
           <div className="flex flex-1 justify-between items-center w-[29.7rem] py-4">
             <h1 className="px-4 py-2">Shopping Cart</h1>
-            <ClearCart customClasses="bg-red-500 py-1 px-2 rounded flex items-center transition duration-150 ease-in-out" />
+            <ClearCart customClasses="bg-red-500 py-1 px-2 rounded hover:opacity-90 flex items-center transition duration-150 ease-in-out" />
           </div>
           <TableHeader />
           <TableBody products={cartItems} />

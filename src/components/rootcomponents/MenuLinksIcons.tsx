@@ -8,6 +8,8 @@ import { CiLogout } from 'react-icons/ci';
 import { useToken } from '../../hooks/useToken';
 import { ToastContainer, toast } from 'react-toastify';
 import { useGetWishlistMutation } from '../../service/productApi';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setTotalNumber } from '../../slices/cartNumber.slice';
 import * as components from '../index';
 
 interface MenuLinkIconProp {
@@ -22,6 +24,8 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
   const { token, user } = useToken();
   const [modal, setModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
+  const { totalNumber } = useAppSelector((state) => state.totalNumber);
   const handleClick = () => {
     navigate('user');
   };
@@ -45,7 +49,9 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
         setModal(false);
       }
     };
-
+    if (items) {
+      dispatch(setTotalNumber(items.cart.products.length));
+    }
     if (modal) {
       document.addEventListener('mousedown', handleClickOutside);
     } else {
@@ -60,12 +66,8 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
       clearInterval(intervalId);
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [getWishlist, modal, refetch, token]);
+  }, [dispatch, getWishlist, items, modal, refetch, token, totalNumber]);
 
-  let totalNumber = 0;
-  if (items) {
-    totalNumber = items.cart.products.length;
-  }
   const handleCart = () => {
     if (!user) {
       toast.error(' Not Logged In');
