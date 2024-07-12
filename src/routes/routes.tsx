@@ -6,7 +6,7 @@ import { Users } from '../pages/adminpages/index';
 import TwoFactorAuth from '../pages/auth/TwoFactorAuth';
 import { ForgotPassword } from '../pages/authpages/ForgotPassword';
 import { ResetPassword } from '../pages/authpages/ResetPassword';
-import AllProducts from '../pages/rootpages/AllProducts';
+import Shop from '../pages/rootpages/Shop';
 import { Product, ProductItem } from '../pages/vendorpages';
 
 import Cart from '../pages/rootpages/Cart';
@@ -18,8 +18,8 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Pages.HomePage /> },
       { path: '/new', element: <Pages.AddProducts /> },
-      { path: '/shop', element: <AllProducts /> },
       { path: '/cart', element: <Cart /> },
+      { path: '/shop', element: <Shop /> },
       { path: '*', element: <Pages.NotFoundPage /> },
     ],
   },

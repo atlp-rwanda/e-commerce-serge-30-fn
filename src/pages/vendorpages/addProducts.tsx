@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import ToastMessage from '../../components/ToastMessage';
-import { useGetAllCategoriesMutation } from '../../service/categoriesApi';
+import { useGetAllCategoriesQuery } from '../../service/productApi';
 import { useCreateProductMutation } from '../../service/productsApi';
 import Button from '../../components/Button';
 
@@ -27,8 +27,8 @@ export const AddProducts: React.FC = () => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.user);
 
-  const [getAllCategories, { isLoading, isError }] =
-    useGetAllCategoriesMutation();
+  const { data , isLoading, isError } =
+    useGetAllCategoriesQuery();
   const [createProduct, { isLoading: isCreating }] = useCreateProductMutation();
 
   useEffect(() => {
@@ -39,9 +39,7 @@ export const AddProducts: React.FC = () => {
           console.error('You are not authenticated.');
           return;
         }
-
-        const { data } = await getAllCategories({ token });
-        if (data && data.data) {
+        if (!isLoading && data) {
           setCategories(data.data);
         } else {
           console.error('No categories found in response:', data);
@@ -52,7 +50,7 @@ export const AddProducts: React.FC = () => {
     };
 
     fetchCategories();
-  }, []);
+  }, [data, isLoading]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
