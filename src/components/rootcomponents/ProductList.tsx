@@ -1,7 +1,11 @@
 import { Button } from './Button';
 import ShopProduct from './ShopProduct';
-
+import { useNavigate } from 'react-router-dom';
 const ProductList = () => {
+  const navigate = useNavigate();
+  const handleAllProducts = () => {
+    navigate('/shop');
+  };
   return (
     <div className="bg-[#fafafa] px-8">
       <div className="bg-[FAFAFA] my-12 font-outfit">
@@ -15,6 +19,7 @@ const ProductList = () => {
           <Button
             children="View All Products"
             className=" bg-black text-white py-2 px-6 rounded-sm  "
+            onClick={handleAllProducts}
           />
         </div>
       </div>

@@ -11,7 +11,6 @@ export const UserLayout: React.FC = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated,
   );
-  //use effect hook if !isAuthenticated navigate to login page
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/auth/login');

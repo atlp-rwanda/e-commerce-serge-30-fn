@@ -35,6 +35,7 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       navigate('/');
+      window.location.reload();
     } catch (error) {
       console.error('Error during logout:', error);
     }
@@ -59,7 +60,7 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
     }
 
     const intervalId = setInterval(() => {
-      refetch();
+      if (token) refetch();
     }, 5000);
 
     return () => {
@@ -70,7 +71,7 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
 
   const handleCart = () => {
     if (!user) {
-      toast.error(' Not Logged In');
+      toast.error(' Your are not logged in');
       setTimeout(() => {
         navigate('/auth/login');
       }, 2000);
@@ -114,7 +115,7 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
           strokeWidth={1.5}
           stroke="currentColor"
           onDoubleClick={handleClick}
-          className={`size-6 w-6 h-6 ${menuActive && 'w-12 h-12'}`}
+          className={`size-6 w-6 h-6 ${menuActive && 'w-12 h-12'} hover:cursor-pointer hover:text-red-400`}
         >
           <path
             strokeLinecap="round"
@@ -123,22 +124,31 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
           />
         </svg>
         {modal && (
-          <div className="absolute top-8 right-24 bg-slate-800 rounded-md text-white flex flex-col p-4 px-8 gap-4">
-            <Link to="/" className="flex items-center gap-2">
+          <div className="absolute top-8 right-24 bg-slate-800 rounded-md text-white flex flex-col p-4 px-8 gap-4 z-50">
+            <Link
+              to="/user"
+              className="flex items-center gap-2 hover:text-blue-400"
+            >
               <MdOutlineAccountCircle />
               Manage My Account
             </Link>
-            <Link to="/new" className="flex items-center gap-2">
+            <Link
+              to="/user"
+              className="flex items-center gap-2 hover:text-blue-400"
+            >
               <BsBagCheck />
               My Order
             </Link>
-            <Link to="/shop" className="flex items-center gap-2">
+            <Link
+              to="/shop"
+              className="flex items-center gap-2 hover:text-blue-400"
+            >
               <CiStar />
               My Reviews
             </Link>
             <Link
               to="/"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 hover:text-blue-400"
               onClick={handleLogout}
             >
               <CiLogout />

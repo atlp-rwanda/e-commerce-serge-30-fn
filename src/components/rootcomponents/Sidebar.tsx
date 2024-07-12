@@ -5,6 +5,7 @@ import { CiSettings } from 'react-icons/ci';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { SidebarLink } from '../../data/index';
+import { useLogoutMutation } from '../../service/authApi';
 
 interface SidebarProps {
   userLinks: SidebarLink[];
@@ -13,11 +14,21 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [logoutMutation, { isLoading: logoutLoading }] = useLogoutMutation();
 
   const handleClick = () => {
     navigate('me');
   };
-
+  const handleLogout = async () => {
+    try {
+      await logoutMutation({});
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      navigate('/');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
   return (
     <div>
       {/* Sidebar for large screens */}
@@ -34,7 +45,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
             >
               <NavLink
                 end
-                className="flex items-center gap-x-2 p-2 hover:bg-customBlue hover:text-white"
+                className={({ isActive }) =>
+                  isActive
+                    ? ' bg-blue-600 rounded-md text-white flex items-center gap-x-2 p-2 hover:bg-customBlue hover:rounded-md hover:text-white'
+                    : 'flex items-center gap-x-2 p-2 hover:bg-customBlue hover:rounded-md hover:text-white'
+                }
                 to={`/user${item.link}`}
               >
                 <item.icon className="text-2xl" />
@@ -51,9 +66,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
             <CiSettings className="text-2xl" />
             <span>Settings</span>
           </li>
-          <li className="flex gap-x-2 items-center p-3 hover:bg-customBlue hover:text-white cursor-pointer">
+          <li
+            className="flex gap-x-2 items-center p-3 hover:bg-customBlue hover:text-white cursor-pointer"
+            onClick={handleLogout}
+          >
             <IoLogOutOutline className="text-2xl" />
-            <span>Logout</span>
+            <span>{logoutLoading ? 'Logout....' : 'Logout'}</span>
           </li>
         </ul>
       </div>
@@ -94,9 +112,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
               <CiSettings className="text-2xl" />
               <span>Settings</span>
             </li>
-            <li className="flex gap-x-2 items-center p-3 hover:bg-customBlue hover:text-white cursor-pointer">
+            <li
+              className="flex gap-x-2 items-center p-3 hover:bg-customBlue hover:text-white cursor-pointer"
+              onClick={handleLogout}
+            >
               <IoLogOutOutline className="text-2xl" />
-              <span>Logout</span>
+              <span>{logoutLoading ? 'Logout....' : 'Logout'}</span>
             </li>
           </ul>
         )}

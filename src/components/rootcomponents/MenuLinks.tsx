@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../../service/authApi';
 import { RootState } from '../../redux/store';
 import { setAuthentication } from '../../redux/features/auth/authSlice';
-import { useEffect } from 'react';
+
 interface MenuLinkProp {
   className?: string;
 }
+
 const MenuLinks = ({ className }: MenuLinkProp) => {
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const MenuLinks = ({ className }: MenuLinkProp) => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated,
   );
-  useEffect(() => {}, [isAuthenticated]);
+
   const handleLogout = async () => {
     try {
       await logout({});
@@ -22,13 +23,14 @@ const MenuLinks = ({ className }: MenuLinkProp) => {
       localStorage.removeItem('user');
       dispatch(setAuthentication(false));
       navigate('/');
+      window.location.reload();
     } catch (error) {
       console.error('Error during logout:', error);
     }
   };
+
   return (
     <div className={className}>
-      {' '}
       <Link to="/" className="hover:underline">
         Home
       </Link>
