@@ -169,6 +169,16 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         };
       },
     }),
+    userDataById: builder.mutation({
+      query: ({ id, token }) => ({
+        url: `api/v1/${id}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      }),
+    }),
     updateProfile: builder.mutation<User, Partial<Profile>>({
       query: (updatedProfile) => {
         const token = localStorage.getItem('token');
@@ -200,4 +210,5 @@ export const {
   useGetAllProductsQuery,
   useAddToCartMutation,
   useViewCartQuery,
+  useUserDataByIdMutation,
 } = authApi;

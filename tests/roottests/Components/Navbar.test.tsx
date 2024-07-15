@@ -10,7 +10,7 @@ describe('Home Navbar', () => {
   });
 
   it('should change menuActive state', async () => {
-    navigateTo('/shop');
+    navigateTo('/');
     const user = userEvent.setup();
     const openMenuButton = screen.getByLabelText(/open menu/i);
     await user.click(openMenuButton);
