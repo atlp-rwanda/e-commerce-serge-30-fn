@@ -90,6 +90,15 @@ const productApi = ecommerceSergeApi.injectEndpoints({
         body: review,
       }),
     }),
+    clearCart: builder.mutation({
+      query: () => ({
+        url: `api/v1/cart/clearcart`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
   }),
 });
 
@@ -103,4 +112,5 @@ export const {
   useAddProductToWishlistMutation,
   useGetWishlistMutation,
   useAddReviewMutation,
+  useClearCartMutation,
 } = productApi;

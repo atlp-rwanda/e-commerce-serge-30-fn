@@ -6,6 +6,7 @@ import cartReducer from './features/cartSlice';
 import { searchReducer, signupReducer } from '../slices';
 import verificationReducer from '../slices/verification.slice';
 import UpdatePasswordReducer from '../slices/updatepassword.slice';
+import totalNumberReducer from '../slices/cartNumber.slice';
 export const store = configureStore({
   reducer: {
     user: userReducer,
@@ -14,7 +15,8 @@ export const store = configureStore({
     cart: cartReducer,
     [ecommerceSergeApi.reducerPath]: ecommerceSergeApi.reducer,
     password: UpdatePasswordReducer,
-    search:searchReducer
+    search: searchReducer,
+    totalNumber: totalNumberReducer,
   },
   middleware: (getDefaultMiddle) =>
     getDefaultMiddle().concat(ecommerceSergeApi.middleware),
