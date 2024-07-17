@@ -1,4 +1,3 @@
-// src/components/NotificationPage.tsx
 import React, { useState, useEffect } from 'react';
 import { FaBell } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
@@ -8,10 +7,15 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   setNotifications,
   markAsRead as markAsReadInStore,
+  markAllAsRead as markAllAsReadInStore,
 } from '../../slices/notificationsSlice';
-import { useMarkAsReadMutation } from '../../service/authApi';
+import {
+  useMarkAsReadMutation,
+  useMarkAllAsReadMutation,
+} from '../../service/authApi';
 import { INotification } from '../../types/Notificaiton.types';
 import { useToken } from '../../hooks/useToken';
+
 const ITEMS_PER_PAGE = 10;
 
 export const NotificationPage: React.FC = () => {
@@ -22,6 +26,8 @@ export const NotificationPage: React.FC = () => {
   );
   const dispatch = useAppDispatch();
   const [markAsRead] = useMarkAsReadMutation();
+  const [markAllAsRead, { isLoading: isMarkingAllAsRead }] =
+    useMarkAllAsReadMutation();
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>(
     {},
   );
@@ -29,6 +35,7 @@ export const NotificationPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { user } = useToken();
   const userId = user?.user_id;
+
   useEffect(() => {
     socket.emit('fetchNotifications', userId);
 
@@ -100,16 +107,30 @@ export const NotificationPage: React.FC = () => {
     }
   };
 
+  const handleMarkAllAsRead = async () => {
+    try {
+      await markAllAsRead({}).unwrap();
+      dispatch(markAllAsReadInStore());
+      toast.success('All notifications marked as read');
+    } catch (error) {
+      toast.error('Error while marking all notifications as read');
+    }
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString();
   };
 
+  const allNotificationsRead = notifications.every((n) => n.isRead);
+
   return (
     <div className="w-10/12 mx-auto mt-8 p-4 bg-white shadow-lg rounded-lg">
       <ToastContainer />
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
-        All Notifications
-      </h1>
+      <div className="mb-4 flex justify-between items-center">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+          All Notifications
+        </h1>
+      </div>
 
       <div className="mb-4 flex justify-between items-center">
         <div className="flex space-x-2">
@@ -144,6 +165,19 @@ export const NotificationPage: React.FC = () => {
             Today
           </Button>
         </div>
+        {!allNotificationsRead && (
+          <Button
+            onClick={handleMarkAllAsRead}
+            className={`px-4 py-2 rounded-lg transition duration-300 ${
+              isMarkingAllAsRead
+                ? 'bg-gray-200 text-gray-400'
+                : 'bg-green-500 text-white hover:bg-green-600'
+            }`}
+            disabled={isMarkingAllAsRead}
+          >
+            {isMarkingAllAsRead ? 'Marking All...' : 'Mark All as Read'}
+          </Button>
+        )}
       </div>
 
       {isLoading ? (
@@ -172,7 +206,9 @@ export const NotificationPage: React.FC = () => {
             >
               <div className="flex-shrink-0 mr-3">
                 <FaBell
-                  className={`h-6 w-6 ${notification.isRead ? 'text-gray-400' : 'text-red-500'}`}
+                  className={`h-6 w-6 ${
+                    notification.isRead ? 'text-gray-400' : 'text-red-500'
+                  }`}
                 />
               </div>
               <div className="flex-1">
