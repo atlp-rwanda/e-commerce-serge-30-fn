@@ -9,7 +9,8 @@ import { Deliverydetails } from './DeliveryDetails'
 import { ProductReviews } from '../../components/usercomponents/reviews';
 import Footer from '../../components/rootcomponents/Footer';
 import { Button } from '../../components/rootcomponents/Button';
-import { AddToCartButton } from './AddToCartButton'
+import { AddToCartButton } from './AddToCartButton';
+import { RecommendedProducts } from './RecommendedProducts';
 import { IProduct } from '../../types';
 
 export const ProductDetails: React.FC = () => {
@@ -134,6 +135,12 @@ export const ProductDetails: React.FC = () => {
         </div>
 
         <ProductReviews />
+
+        <div className="flex items-center justify-center mt-12 mb-6">
+          <p className="text-xl font-semibold">Recommended Products</p>
+        </div>
+
+        <RecommendedProducts />
       </div>
       <Footer />
     </>
