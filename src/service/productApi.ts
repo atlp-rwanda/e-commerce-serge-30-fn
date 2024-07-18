@@ -4,6 +4,18 @@ import { Category } from '../types/category.types';
 
 const productApi = ecommerceSergeApi.injectEndpoints({
   endpoints: (builder) => ({
+    createProduct: builder.mutation({
+      query: ({ token, product }) => ({
+        url: 'api/v1/product/create',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        credentials: 'include',
+        body: product,
+      }),
+    }),
     getAllProducts: builder.query<
       { success: boolean; message: string; data: IProduct[] },
       void
@@ -103,6 +115,7 @@ const productApi = ecommerceSergeApi.injectEndpoints({
 });
 
 export const {
+  useCreateProductMutation,
   useGetAllProductsQuery,
   useSearchProductsMutation,
   useGetAllCategoriesQuery,

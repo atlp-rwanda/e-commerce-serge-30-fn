@@ -8,6 +8,7 @@ import { ForgotPassword } from '../pages/authpages/ForgotPassword';
 import { ResetPassword } from '../pages/authpages/ResetPassword';
 import Shop from '../pages/rootpages/Shop';
 import { Product, ProductItem } from '../pages/vendorpages';
+import BillingDetails from '../components/usercomponents/BillingDetails';
 import Cart from '../pages/rootpages/Cart';
 import { ProductDetails } from '../components/rootcomponents/ProductDetails';
 
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: '/shop', element: <Shop /> },
       { path: '/product/:productId', element: <ProductDetails /> },
 
+      { path: '/billing-details', element: <BillingDetails /> },
       { path: '*', element: <Pages.NotFoundPage /> },
     ],
   },

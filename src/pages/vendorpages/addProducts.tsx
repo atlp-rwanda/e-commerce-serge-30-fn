@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import ToastMessage from '../../components/ToastMessage';
 import { useGetAllCategoriesQuery } from '../../service/productApi';
-import { useCreateProductMutation } from '../../service/productsApi';
+import { useCreateProductMutation } from '../../service/productApi';
 import Button from '../../components/Button';
 
 export const AddProducts: React.FC = () => {
@@ -27,8 +27,7 @@ export const AddProducts: React.FC = () => {
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.user);
 
-  const { data , isLoading, isError } =
-    useGetAllCategoriesQuery();
+  const { data, isLoading, isError } = useGetAllCategoriesQuery();
   const [createProduct, { isLoading: isCreating }] = useCreateProductMutation();
 
   useEffect(() => {

@@ -3,18 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components';
 import Footer from '../../components/rootcomponents/Footer';
 import OrderSummary from '../../components/rootcomponents/OrderSummary';
-import { ToastContainer } from 'react-toastify';
 import { TableBody } from '../../components/rootcomponents/TableBody';
 import TableHeader from '../../components/rootcomponents/TableHeader';
 import { useViewCartQuery } from '../../service/authApi';
 import { ClearCart } from '../../components/usercomponents/ClearCart';
 import { IUser } from '../../types';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Cart: React.FC = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const navigate = useNavigate();
-  const toastShownRef = useRef(false);
-
+  const adminVendorToastShownRef = useRef(false);
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userString = localStorage.getItem('user');
@@ -24,14 +23,14 @@ const Cart: React.FC = () => {
       if (user.role === 'ADMIN' || user.role === 'VENDOR') {
         navigate('/');
         setTimeout(() => {
-          if (!toastShownRef.current) {
+          if (!adminVendorToastShownRef.current) {
             toast.dark('Cart is for buyers only');
-            toastShownRef.current = true;
+            adminVendorToastShownRef.current = true;
           }
         }, 500);
       }
     }
-  }, []);
+  }, [navigate]);
   const {
     data: items,
     isLoading,
@@ -66,6 +65,9 @@ const Cart: React.FC = () => {
   if (!items || items.cart.products.length === 0) return <h1>Empty Cart</h1>;
 
   const cartItems = items.cart.products;
+  const handleCheckoutClick = () => {
+    navigate('/billing-details', { state: { cartItems } });
+  };
 
   return (
     <div className="bg-[#FAFAFA] font-outfit">
@@ -86,6 +88,7 @@ const Cart: React.FC = () => {
           <OrderSummary label="Total" content="0" />
           <Button
             className="rounded-sm text-white py-2 mt-8"
+            onClick={handleCheckoutClick}
             children="proceed to checkout"
           />
         </div>
