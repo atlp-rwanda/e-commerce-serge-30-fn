@@ -111,6 +111,16 @@ const productApi = ecommerceSergeApi.injectEndpoints({
         },
       }),
     }),
+    recommendedProducts: builder.mutation({
+      query: ({ token, product_id }) => ({
+        url: `api/v1/product/${product_id}/recommended`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -126,4 +136,5 @@ export const {
   useGetWishlistMutation,
   useAddReviewMutation,
   useClearCartMutation,
+  useRecommendedProductsMutation,
 } = productApi;
