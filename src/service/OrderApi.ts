@@ -1,4 +1,5 @@
 import { ecommerceSergeApi } from './index';
+import { Order } from '../types';
 import { IOrder, IOrderResponse } from '../types/Product.types';
 
 const orderApi = ecommerceSergeApi.injectEndpoints({
@@ -11,6 +12,33 @@ const orderApi = ecommerceSergeApi.injectEndpoints({
         url: 'api/v1/checkout',
         method: 'POST',
         body: orderDetails,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
+    getAllOrders: builder.query<
+      { success: boolean; message: string; data: Order[] },
+      void
+    >({
+      query: () => ({
+        url: 'api/v1/orders/all',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
+    getSingleOrder: builder.query<{}, string>({
+      query: (id) => ({
+        url: `api/v1/orders/${id}/status`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${localStorage.getItem('token')}`,
+        },
       }),
     }),
     createPaymentSession: builder.mutation<any, { orderId: string }>({
@@ -23,5 +51,5 @@ const orderApi = ecommerceSergeApi.injectEndpoints({
   }),
 });
 
-export const { useCreateOrderMutation, useCreatePaymentSessionMutation } =
-  orderApi;
+
+export const { useGetAllOrdersQuery, useGetSingleOrderQuery,useCreateOrderMutation, useCreatePaymentSessionMutation } = orderApi;
