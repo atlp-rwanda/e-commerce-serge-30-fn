@@ -7,7 +7,7 @@ export * from './authpages/ResetPassword';
 export * from './authpages/SignupPage';
 export * from './authpages/VerificationFailed';
 export * from './authpages/VerificationPage';
-export * from './userpage/userSettings';
+export * from './userPages/userSettings';
 export * from './authpages/RequestPwdChangePage';
 export * from './authpages/SignupPage';
 export * from './vendorpages/addProducts';

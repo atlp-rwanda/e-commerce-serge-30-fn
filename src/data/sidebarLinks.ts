@@ -22,7 +22,7 @@ export const sidebarLinks: UserSidebarLink[] = [
     id: 2,
     name: 'My orders',
     icon: IoBagHandleOutline,
-    link: '/orders',
+    link: '/orders/all',
   },
   {
     id: 3,
