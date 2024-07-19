@@ -11,3 +11,4 @@ export * from './userPages/userSettings';
 export * from './authpages/RequestPwdChangePage';
 export * from './authpages/SignupPage';
 export * from './vendorpages/addProducts';
+export * from './vendorpages/ProductUpdatePage';

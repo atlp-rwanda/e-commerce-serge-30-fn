@@ -1,6 +1,29 @@
 import { ecommerceSergeApi } from './index';
-import { IProduct } from '../types';
+import { IProduct, ProductData } from '../types';
 import { Category } from '../types/category.types';
+
+interface DeleteProductImageParams {
+  productId: string;
+  imageUrl: string;
+  token: string;
+}
+
+interface UpdateProductFormData {
+  name: string;
+  description: string;
+  price: number;
+  category_name: string;
+  expiry_date: string;
+  image_url: string[];
+  quantity: number;
+  discount: number;
+}
+
+interface UpdateProductParams {
+  productId: string;
+  token: string;
+  UpdateProductFormData: UpdateProductFormData;
+}
 
 const productApi = ecommerceSergeApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -111,6 +134,53 @@ const productApi = ecommerceSergeApi.injectEndpoints({
         },
       }),
     }),
+    getProduct: builder.query<
+      ProductData,
+      { token: string; productId: string }
+    >({
+      query: ({ token, productId }) => ({
+        url: `/api/v1/product/${productId}`,
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        credentials: 'include',
+      }),
+    }),
+    deleteProductImage: builder.mutation<void, DeleteProductImageParams>({
+      query: ({ productId, imageUrl, token }) => ({
+        url: `/api/v1/product/${productId}/image`,
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ imageUrl }),
+      }),
+    }),
+    updateProduct: builder.mutation<void, UpdateProductParams>({
+      query: ({ productId, token, UpdateProductFormData }) => ({
+        url: `/api/v1/product/${productId}`,
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        body: UpdateProductFormData,
+      }),
+    }),
+    getCategories: builder.query<unknown, string>({
+      query: (token) => ({
+        url: '/api/v1/categories/all',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${token}`,
+        },
+        credentials: 'include',
+      }),
+    }),
     recommendedProducts: builder.mutation({
       query: ({ token, product_id }) => ({
         url: `api/v1/product/${product_id}/recommended`,
@@ -136,5 +206,9 @@ export const {
   useGetWishlistMutation,
   useAddReviewMutation,
   useClearCartMutation,
+  useDeleteProductImageMutation,
+  useGetProductQuery,
+  useUpdateProductMutation,
+  useGetCategoriesQuery,
   useRecommendedProductsMutation,
 } = productApi;

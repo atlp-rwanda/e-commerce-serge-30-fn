@@ -15,3 +15,5 @@ export * from './vendorcomponents/ActionButton';
 export * from './rootcomponents/AddToWishlist';
 export * from './rootcomponents/WishlistButton';
 export * from './usercomponents/UserNavbar';
+export * from './vendorcomponents/ProductUpdateForm';
+

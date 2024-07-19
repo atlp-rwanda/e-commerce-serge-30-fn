@@ -16,6 +16,7 @@ import { NotificationPage } from '../pages/userPages/NotificationPage';
 import Cart from '../pages/rootpages/Cart';
 import { ProductDetails } from '../components/rootcomponents/ProductDetails';
 import * as userPages from '../pages/userPages';
+import { ProductUpdatePage } from '../pages/vendorpages/ProductUpdatePage';
 
 export const router = createBrowserRouter([
   {
@@ -77,6 +78,7 @@ export const router = createBrowserRouter([
         path: 'products/:id',
         element: <ProductItem />,
       },
+      { path: 'products/:id/update', element: <ProductUpdatePage /> },
       {
         path: 'products/new',
         element: <Pages.AddProducts />,
