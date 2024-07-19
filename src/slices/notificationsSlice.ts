@@ -18,14 +18,23 @@ const notificationsSlice = createSlice({
       state.notifications = action.payload;
     },
     markAsRead(state, action: PayloadAction<string>) {
-      state.notifications = state.notifications.map((notification) =>
-        notification.id === action.payload
-          ? { ...notification, isRead: true }
-          : notification,
+      const notification = state.notifications.find(
+        (n) => n.id === action.payload,
       );
+      if (notification) {
+        notification.isRead = true;
+      }
+    },
+    markAllAsRead(state) {
+      state.notifications = state.notifications.map((notification) => ({
+        ...notification,
+        isRead: true,
+      }));
     },
   },
 });
 
-export const { setNotifications, markAsRead } = notificationsSlice.actions;
+export const { setNotifications, markAsRead, markAllAsRead } =
+  notificationsSlice.actions;
+
 export default notificationsSlice.reducer;

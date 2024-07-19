@@ -202,6 +202,15 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         };
       },
     }),
+    markAllAsRead: builder.mutation({
+      query: () => ({
+        url: 'api/v1/notifications/all/read',
+        method: 'PATCH',
+        headers: {
+          Authorization: localStorage.getItem('token') || '',
+        },
+      }),
+    }),
   }),
 });
 export const {
@@ -221,4 +230,5 @@ export const {
   useAddToCartMutation,
   useViewCartQuery,
   useUserDataByIdMutation,
+  useMarkAllAsReadMutation,
 } = authApi;

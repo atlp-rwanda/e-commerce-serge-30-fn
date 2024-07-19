@@ -9,7 +9,6 @@ describe('Deliverydetails', () => {
     expect(
       screen.getByText('Enter your postal code for Delivery Availability'),
     ).toBeInTheDocument();
-
     expect(screen.getByText('Return Delivery')).toBeInTheDocument();
     expect(
       screen.getByText('Free 30 Days Delivery Returns.'),

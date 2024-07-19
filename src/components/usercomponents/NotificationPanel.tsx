@@ -1,9 +1,12 @@
-// src/components/NotificationPanel.tsx
 import React, { useState, useRef, useEffect } from 'react';
 import { FaBell } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import { useMarkAsReadMutation } from '../../service/authApi';
+import { RiCheckDoubleLine } from 'react-icons/ri';
+import {
+  useMarkAsReadMutation,
+  useMarkAllAsReadMutation,
+} from '../../service/authApi';
 import {
   Button,
   NotificationBadge,
@@ -15,8 +18,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
   setNotifications,
   markAsRead as markAsReadInStore,
+  markAllAsRead as markAllAsReadInStore,
 } from '../../slices/notificationsSlice';
 import { useToken } from '../../hooks/useToken';
+
 const NotificationPanel: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedNotificationId, setExpandedNotificationId] = useState<
@@ -35,7 +40,10 @@ const NotificationPanel: React.FC = () => {
   const notificationPanelRef = useRef<HTMLDivElement>(null);
   const { user } = useToken();
   const [markAsRead] = useMarkAsReadMutation();
+  const [markAllAsRead, { isLoading: isMarkAllAsReadLoading }] =
+    useMarkAllAsReadMutation();
   const userId = user?.user_id;
+
   const handleClickOutside = (event: MouseEvent) => {
     if (
       notificationPanelRef.current &&
@@ -97,6 +105,16 @@ const NotificationPanel: React.FC = () => {
     setExpandedNotificationId(expandedNotificationId === id ? null : id);
   };
 
+  const handleMarkAllAsRead = async () => {
+    try {
+      await markAllAsRead({}).unwrap();
+      dispatch(markAllAsReadInStore());
+      socket.emit('fetchNotifications', userId);
+    } catch (error) {
+      toast.error('Error while marking all notifications as read');
+    }
+  };
+
   const sortedNotifications = [...notifications].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
@@ -135,7 +153,22 @@ const NotificationPanel: React.FC = () => {
             className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 shadow-lg rounded-lg z-20 overflow-hidden"
           >
             <div className="p-4">
-              <p className="text-gray-700 font-semibold mb-3">Notifications</p>
+              <div className="flex items-center justify-between">
+                <p className="text-gray-700 font-semibold mb-3">
+                  Notifications
+                </p>
+                <Button
+                  className={`text-blue-500 hover:underline transition duration-300 ${isMarkAllAsReadLoading ? 'cursor-not-allowed opacity-50' : ''}`}
+                  onClick={handleMarkAllAsRead}
+                  disabled={isMarkAllAsReadLoading}
+                >
+                  <RiCheckDoubleLine
+                    title="Mark All As Read"
+                    className="h-6 w-6"
+                  />
+                </Button>
+              </div>
+
               <NotificationFilters filter={filter} setFilter={setFilter} />
               {isLoading ? (
                 <div className="space-y-4">
