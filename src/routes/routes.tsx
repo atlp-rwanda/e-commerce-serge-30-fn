@@ -9,6 +9,9 @@ import { ResetPassword } from '../pages/authpages/ResetPassword';
 import Shop from '../pages/rootpages/Shop';
 import { Product, ProductItem } from '../pages/vendorpages';
 import BillingDetails from '../components/usercomponents/BillingDetails';
+import PaymentSuccess from '../components/usercomponents/PaymentSuccess';
+import PaymentFailure from '../components/usercomponents/PaymentFailure';
+import PaymentsPage from '../pages/userpage/PaymentList';
 import Cart from '../pages/rootpages/Cart';
 import { ProductDetails } from '../components/rootcomponents/ProductDetails';
 
@@ -24,6 +27,12 @@ export const router = createBrowserRouter([
       { path: '/product/:productId', element: <ProductDetails /> },
 
       { path: '/billing-details', element: <BillingDetails /> },
+      { path: '/payment/success', element: <PaymentSuccess /> },
+      { path: '/payment/failure', element: <PaymentFailure /> },
+      {
+        path: '/payment/all',
+        element: <PaymentsPage />,
+      },
       { path: '*', element: <Pages.NotFoundPage /> },
     ],
   },
