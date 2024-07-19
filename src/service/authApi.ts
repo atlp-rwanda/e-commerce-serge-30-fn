@@ -143,6 +143,15 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         body: { role },
       }),
     }),
+    markAsRead: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `api/v1/notifications/${id}/read`,
+        method: 'PATCH',
+        headers: {
+          Authorization: localStorage.getItem('token') || '',
+        },
+      }),
+    }),
     disableAccount: builder.mutation<
       { message: string },
       { id: string; token: string }
@@ -205,6 +214,7 @@ export const {
   useUpdatePasswordMutation,
   useAssignRoleMutation,
   useDisableAccountMutation,
+  useMarkAsReadMutation,
   useUserProfileQuery,
   useUpdateProfileMutation,
   useGetAllProductsQuery,

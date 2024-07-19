@@ -12,7 +12,7 @@ describe('AddToWishlist', () => {
         <Router>
           <AddToWishlist {...props} />
         </Router>
-      </Provider>
+      </Provider>,
     );
 
   it('renders the wishlist button with the correct icon', () => {
@@ -26,6 +26,8 @@ describe('AddToWishlist', () => {
     renderComponent({ productId: '1', isInWishlist: true });
     const button = screen.getByRole('button', { name: /add to wishlist/i });
     fireEvent.click(button);
-    expect(screen.queryByText('Product added to wishlist successfully.')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Product added to wishlist successfully.'),
+    ).not.toBeInTheDocument();
   });
 });

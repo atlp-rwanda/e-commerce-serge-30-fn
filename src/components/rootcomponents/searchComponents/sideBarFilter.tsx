@@ -51,7 +51,6 @@ export const SideBarFilter: React.FC<SideBarProps> = ({
     category: string,
     price: number[],
   ) => {
-    
     searchProducts({
       name: searchTerm,
       category,

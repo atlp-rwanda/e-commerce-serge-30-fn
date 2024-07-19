@@ -14,3 +14,4 @@ export * from './ToastMessage';
 export * from './vendorcomponents/ActionButton';
 export * from './rootcomponents/AddToWishlist';
 export * from './rootcomponents/WishlistButton';
+export * from './usercomponents/UserNavbar';

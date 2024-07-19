@@ -4,8 +4,8 @@ import { Loading } from '../../utils/Loading';
 import { useParams } from 'react-router-dom';
 import StarIcon from './StarIcon';
 import { CiHeart } from 'react-icons/ci';
-import { ToastContainer } from 'react-toastify'
-import { Deliverydetails } from './DeliveryDetails'
+import { ToastContainer } from 'react-toastify';
+import Deliverydetails from './DeliveryDetails';
 import { ProductReviews } from '../../components/usercomponents/reviews';
 import Footer from '../../components/rootcomponents/Footer';
 import { Button } from '../../components/rootcomponents/Button';
@@ -124,8 +124,7 @@ export const ProductDetails: React.FC = () => {
                 </div>
               </div>
 
-              < Deliverydetails />
-
+              <Deliverydetails />
             </div>
           </div>
         </div>
