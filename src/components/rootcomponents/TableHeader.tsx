@@ -10,7 +10,7 @@ const TableHeader = () => {
         {cartTableHeaderItems.map((item: CartTableHeaderItem) => (
           <th
             key={item.id}
-            className={`py-1 px-4 text-left text-slate-500 font-outfit font-light ${
+            className={`py-1 px-4 text-left text-slate-500 font-outfit font-light  ${
               item.id === 'email' || item.id === 'image' || item.id === 'price'
                 ? 'max-tablet:hidden'
                 : ''

@@ -35,7 +35,7 @@ export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     }
     const response = await addToCart({
       productid: product.product_id,
-      quantity: product.quantity,
+      quantity: 1,
     });
 
     if (response.data) {
@@ -58,7 +58,7 @@ export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   return (
     <Button
       children="Buy Now"
-      className={`flex items-center gap-2 px-4 py-2 bg-black text-white py-2 px-6 rounded-sm w-full ${hidden ? 'hidden group-hover:block' : ''}`}
+      className={`flex items-center gap-2 px-4 py-2 bg-black text-white  rounded-sm w-full ${hidden ? 'hidden group-hover:block' : ''}`}
       onClick={handleAddToCart}
     />
   );

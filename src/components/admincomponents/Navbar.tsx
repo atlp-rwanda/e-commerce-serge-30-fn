@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ onClick }) => {
           <FaBell />
 
           <Button
-            className="px-0 hover:bg-white bg-white inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full"
+            className="p-0 hover:bg-white bg-white inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-14 w-14 rounded-full"
             type="button"
             id="radix-:r0:"
             aria-haspopup="menu"
@@ -38,8 +38,6 @@ const Navbar: React.FC<NavbarProps> = ({ onClick }) => {
               src={
                 users?.image_url ? users.image_url : 'https://i.pravatar.cc/300'
               }
-              width="32"
-              height="32"
               className="rounded-full ring ring-slate-800"
               alt="Avatar"
             />
