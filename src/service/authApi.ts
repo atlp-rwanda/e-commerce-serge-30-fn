@@ -211,6 +211,17 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         },
       }),
     }),
+    getAllChats: builder.query({
+      query: () => {
+        return {
+          url: 'api/v1/chats/all',
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+      },
+    }),
   }),
 });
 export const {
@@ -231,4 +242,5 @@ export const {
   useViewCartQuery,
   useUserDataByIdMutation,
   useMarkAllAsReadMutation,
+  useGetAllChatsQuery,
 } = authApi;

@@ -10,11 +10,13 @@ import ProductLoader from './ProductLoader';
 interface AddToCartButtonProps {
   product: IProduct;
   hidden?: boolean;
+  quantity?: number;
 }
 
 export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   product,
   hidden = false,
+  quantity = 1,
 }) => {
   const { token, user } = useToken();
   const [addToCart, { isLoading: addtocartLoading }] = useAddToCartMutation();
@@ -35,7 +37,7 @@ export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     }
     const response = await addToCart({
       productid: product.product_id,
-      quantity: product.quantity,
+      quantity: quantity,
     });
 
     if (response.data) {
@@ -58,7 +60,7 @@ export const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   return (
     <Button
       children="Buy Now"
-      className={`flex items-center gap-2 px-4 py-2 bg-black text-white py-2 px-6 rounded-sm w-full ${hidden ? 'hidden group-hover:block' : ''}`}
+      className={`flex items-center gap-2 px-4 py-2 bg-black text-white  rounded-sm w-full ${hidden ? 'hidden group-hover:block' : ''}`}
       onClick={handleAddToCart}
     />
   );

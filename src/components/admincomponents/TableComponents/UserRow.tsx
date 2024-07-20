@@ -19,7 +19,7 @@ export const UserRow: React.FC<UserRowProps> = ({
       <img
         src={user.image_url ? user.image_url : 'https://i.pravatar.cc/300'}
         alt="user Image"
-        className="w-12 h-12 mr-4"
+        className="w-12 h-12 mr-4 rounded-full"
       />
     </td>
     <td className="py-1 px-4">{user.firstname}</td>

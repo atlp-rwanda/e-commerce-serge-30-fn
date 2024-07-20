@@ -2,6 +2,7 @@ import { FaRegHeart } from 'react-icons/fa';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
 import { IoBagHandleOutline } from 'react-icons/io5';
 import { MdStarOutline, MdOutlineNotificationsActive } from 'react-icons/md';
+import { IoChatbubblesOutline } from 'react-icons/io5';
 import React from 'react';
 
 export type UserSidebarLink = {
@@ -41,5 +42,11 @@ export const sidebarLinks: UserSidebarLink[] = [
     name: 'Wishlist',
     icon: FaRegHeart,
     link: '/wishlist',
+  },
+  {
+    id: 6,
+    name: 'Chat',
+    icon: IoChatbubblesOutline,
+    link: '/chat',
   },
 ];
