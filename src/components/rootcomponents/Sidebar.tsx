@@ -25,6 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       navigate('/');
+      window.location.reload();
     } catch (error) {
       console.error('Error during logout:', error);
     }
@@ -33,7 +34,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ userLinks }) => {
     <div>
       {/* Sidebar for large screens */}
       <div className="hidden tablet:flex flex-col p-3 border-r w-64 h-screen">
-        <div className="flex justify-center items-center gap-x-3 mb-12 cursor-pointer" onClick={()=> navigate('/')}>
+        <div
+          className="flex justify-center items-center gap-x-3 mb-12 cursor-pointer"
+          onClick={() => navigate('/')}
+        >
           <FaShoppingCart className="text-2xl" />
           <h1 className="text-2xl font-bold">Exclusive</h1>
         </div>

@@ -14,11 +14,13 @@ import { useDispatch } from 'react-redux';
 import { Puff } from 'react-loader-spinner';
 
 interface SideBarProps {
+  getLoading: (loading: boolean) => void;
   filteredData: (data: IProduct[]) => void;
   getError: (error: string) => void;
 }
 
 export const SideBarFilter: React.FC<SideBarProps> = ({
+  getLoading,
   filteredData,
   getError,
 }) => {
@@ -26,10 +28,19 @@ export const SideBarFilter: React.FC<SideBarProps> = ({
   const [price, setPrice] = useState<number[]>([0, 90000]);
   const [
     searchProducts,
-    { data, isLoading, error: errorSearch, isError: isErrorSearch },
+    {
+      data,
+      isLoading: searchLoading,
+      error: errorSearch,
+      isError: isErrorSearch,
+    },
   ] = useSearchProductsMutation();
   const [showFilter, setShowFilter] = useState(true);
-  const { data: categoriesData, isError } = useGetAllCategoriesQuery();
+  const {
+    data: categoriesData,
+    isLoading,
+    isError,
+  } = useGetAllCategoriesQuery();
   const categories = categoriesData?.data || [];
   const errorMessage = (errorSearch as any)?.data?.message || 'network Error';
   const searchTerm = useSelector(
@@ -38,13 +49,14 @@ export const SideBarFilter: React.FC<SideBarProps> = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
+    getLoading(searchLoading);
     if (!isLoading && data) {
       filteredData(data);
     }
     if (isErrorSearch) {
       getError(errorMessage);
     }
-  }, [isLoading, data, errorSearch]);
+  }, [isLoading, data, errorSearch, searchLoading, getLoading]);
 
   const handleFilter = (
     searchTerm: string,
@@ -69,7 +81,7 @@ export const SideBarFilter: React.FC<SideBarProps> = ({
   }, [searchTerm, currentCategory, price]);
 
   return (
-    <div className="bg-white max-h-96 w-1/5 rounded-md border-x border-neutral-300 flex flex-col p-4 justify-center sticky top-20 max-sm:w-full max-sm:absolute max-sm:z-2">
+    <div className="bg-white max-h-96 w-1/5 rounded-md border-x border-neutral-300 flex flex-col p-4 justify-center sticky top-20 max-sm:w-full max-sm:absolute max-sm:z-30 max-sm:z-2">
       <Button
         className="absolute -top-16 right-12 md:hidden bg-transparent hover:bg-transparent"
         onClick={() => setShowFilter(!showFilter)}

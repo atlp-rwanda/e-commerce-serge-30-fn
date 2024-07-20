@@ -73,7 +73,9 @@ export function SingleOrder() {
   return (
     <div data-testid="container-of-singleOrder" className="flex flex-col p-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-neutral-400">Order #{currentOrder?.id.toString().slice(0, 3)}</h1>
+        <h1 className="text-3xl font-bold text-neutral-400">
+          Order #{currentOrder?.id.toString().slice(0, 3)}
+        </h1>
         <Link
           to="/customer-support"
           className="hover:text-neutral-400 self-end px-4 py-2"
@@ -87,9 +89,7 @@ export function SingleOrder() {
           <h2 className="text-2xl font-semibold">Items in your order</h2>
           <div className="flex flex-wrap gap-4">
             {currentOrder?.products.map((product: any) => (
-              <div
-                className="w-1/2 md:w-1/4 lg:w-1/6 xl:w-1/8"
-              >
+              <div className="w-1/2 md:w-1/4 lg:w-1/6 xl:w-1/8">
                 <div className="border p-4">
                   <p className="text-neutral-400">
                     Quantity: {product.quantity}

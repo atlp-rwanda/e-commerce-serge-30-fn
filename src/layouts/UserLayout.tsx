@@ -23,7 +23,7 @@ export const UserLayout: React.FC = () => {
       </aside>
       <section className="flex-1 flex flex-col bg-zinc-50">
         <UserNavbar />
-        <main className="flex-1 overflow-y-auto pb-3">
+        <main className="flex-1 overflow-y-auto pb-3 ">
           <Outlet />
         </main>
       </section>

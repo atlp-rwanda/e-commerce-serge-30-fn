@@ -12,6 +12,7 @@ import {
   useGetAllChatsQuery,
   useUserDataByIdMutation,
 } from '../../service/authApi';
+import { toast, ToastContainer } from 'react-toastify';
 
 interface Message {
   senderId: string;
@@ -26,11 +27,13 @@ const Chat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
   const [typing, setTyping] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Added isLoading state
   const token = localStorage.getItem('token');
   const { data: chatData } = useGetAllChatsQuery({});
   const navigate = useNavigate();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [userDataById] = useUserDataByIdMutation();
+
   async function retrieveUserById(id: string) {
     const rp = await userDataById({ id, token });
     return rp?.data?.username;
@@ -50,6 +53,9 @@ const Chat: React.FC = () => {
       });
 
       newSocket.on('sendUserId', (userId: string) => {
+        toast.success(
+          'You are connected, Please wait while we are loading messages',
+        );
         console.log('User ID received:', userId);
         localStorage.setItem('userId', userId);
       });
@@ -69,19 +75,25 @@ const Chat: React.FC = () => {
     } else {
       navigate('/');
     }
-  }, [token]);
+  }, [navigate, token]);
 
   useEffect(() => {
     if (chatData && chatData.ok && chatData.chat.length > 0) {
       const fetchAndSetMessages = async () => {
-        const allMessages = await Promise.all(
-          chatData.chat.flat().map(async (msg: Message) => {
-            const senderName = await retrieveUserById(msg.senderId);
-            return { ...msg, senderName };
-          }),
-        );
-        setMessages(allMessages);
-        console.log(messages);
+        setIsLoading(true);
+        try {
+          const allMessages = await Promise.all(
+            chatData.chat.flat().map(async (msg: Message) => {
+              const senderName = await retrieveUserById(msg.senderId);
+              return { ...msg, senderName };
+            }),
+          );
+          setMessages(allMessages);
+        } catch (error) {
+          console.error('Error fetching messages:', error);
+        } finally {
+          setIsLoading(false);
+        }
       };
       fetchAndSetMessages();
     } else {
@@ -141,39 +153,48 @@ const Chat: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-white w-full  ">
+    <div className="flex flex-col items-center justify-center text-white w-full">
+      <ToastContainer />
       <div className="w-full px-4 rounded-lg">
-        <div className="main-container  " id="chatApp">
-          <ul id="messages" className="overflow-y-auto h-[90vh]">
-            {messages.map((msg, index) => (
-              <li
-                key={index}
-                className={`mb-6 p-2 rounded-lg w-auto ${
-                  msg.senderId === localStorage.getItem('userId')
-                    ? 'text-green-500 text-right ml-[48vw] w-[30vw] bg-slate-200 text-xl'
-                    : 'text-black text-left w-[35vw] bg-blue-200 text-xl'
-                }`}
-              >
-                <strong>
-                  {msg.senderId === localStorage.getItem('userId')
-                    ? 'Me'
-                    : msg.senderName || 'Other'}
-                  :
-                </strong>{' '}
-                {msg.content}
-                <span
-                  className={`block text-xs mt-1 ${
+        <div className="main-container" id="chatApp">
+          {isLoading ? (
+            <div className="text-center text-white p-4 bg-blue-400">
+              Loading messages...
+            </div>
+          ) : (
+            <ul id="messages" className="overflow-y-auto mb-10">
+              {messages.map((msg, index) => (
+                <li
+                  key={index}
+                  className={`mb-4 p-2 rounded-lg w-auto ${
                     msg.senderId === localStorage.getItem('userId')
-                      ? 'text-green-800'
-                      : 'text-black'
+                      ? 'text-green-500 text-right ml-[48vw] w-[30vw] bg-slate-200 text-xl'
+                      : 'text-black text-left w-[36vw] bg-blue-200 text-xl'
                   }`}
                 >
-                  {!msg.date ? formatTime(msg.updatedAt) : formatTime(msg.date)}
-                </span>
-              </li>
-            ))}
-            <div ref={messagesEndRef} />
-          </ul>
+                  <strong>
+                    {msg.senderId === localStorage.getItem('userId')
+                      ? 'Me'
+                      : msg.senderName || 'Other'}
+                    :
+                  </strong>{' '}
+                  {msg.content}
+                  <span
+                    className={`block text-xs mt-1 ${
+                      msg.senderId === localStorage.getItem('userId')
+                        ? 'text-green-800'
+                        : 'text-black'
+                    }`}
+                  >
+                    {!msg.date
+                      ? formatTime(msg.updatedAt)
+                      : formatTime(msg.date)}
+                  </span>
+                </li>
+              ))}
+              <div ref={messagesEndRef} />
+            </ul>
+          )}
 
           {typing && (
             <div

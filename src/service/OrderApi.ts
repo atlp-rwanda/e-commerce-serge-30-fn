@@ -75,5 +75,9 @@ const orderApi = ecommerceSergeApi.injectEndpoints({
   }),
 });
 
-
-export const { useGetAllOrdersQuery, useGetSingleOrderQuery, useCreatePaymentSessionMutation,useCreateOrderMutation, useFetchAllOrdersQuery, useGetProductByIdQuery, useFetchAllPaymentsQuery  } = orderApi;
+export const {
+  useGetAllOrdersQuery,
+  useGetSingleOrderQuery,
+  
+  useCreatePaymentSessionMutation,useCreateOrderMutation, useFetchAllOrdersQuery, useGetProductByIdQuery, useFetchAllPaymentsQuery ,
+} = orderApi;

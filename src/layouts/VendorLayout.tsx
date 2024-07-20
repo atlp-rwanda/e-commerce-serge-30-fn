@@ -10,16 +10,17 @@ export const VendorLayout: React.FC = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated,
   );
+  const twoAuthState = JSON.parse(localStorage.getItem('twoAuth') || 'false');
   //use effect hook if !isAuthenticated navigate to login page
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !twoAuthState) {
       navigate('/auth/login');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, twoAuthState]);
 
   return (
     <main className="h-screen flex overflow-hidden">
-      <aside>
+      <aside className="max-tablet:hidden">
         <Sidebar />
       </aside>
       <section className="flex-1 flex flex-col">

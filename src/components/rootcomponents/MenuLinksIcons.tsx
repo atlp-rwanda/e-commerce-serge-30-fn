@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLogoutMutation, useViewCartQuery } from '../../service/authApi';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { BsBagCheck } from 'react-icons/bs';
-import { CiStar } from 'react-icons/ci';
 import { CiLogout } from 'react-icons/ci';
 import { useToken } from '../../hooks/useToken';
 import { ToastContainer, toast } from 'react-toastify';
@@ -133,19 +132,13 @@ const MenuLinksIcons = ({ menuActive, className }: MenuLinkIconProp) => {
               Manage My Account
             </Link>
             <Link
-              to="/user"
+              to="/user/orders/all"
               className="flex items-center gap-2 hover:text-blue-400"
             >
               <BsBagCheck />
               My Order
             </Link>
-            <Link
-              to="/shop"
-              className="flex items-center gap-2 hover:text-blue-400"
-            >
-              <CiStar />
-              My Reviews
-            </Link>
+
             <Link
               to="/"
               className="flex items-center gap-2 hover:text-blue-400"

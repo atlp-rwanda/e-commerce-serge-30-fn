@@ -19,7 +19,9 @@ const Sidebar: React.FC = () => {
       await logoutMutation({});
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('twoAuth');
       navigate('/');
+      window.location.reload();
     } catch (error) {
       console.error('Error during logout:', error);
     } finally {

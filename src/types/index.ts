@@ -3,3 +3,4 @@ export * from './User.types';
 export * from './Notificaiton.types';
 
 export * from './Order.types';
+export * from '../pages/userPages/WishlistPage';

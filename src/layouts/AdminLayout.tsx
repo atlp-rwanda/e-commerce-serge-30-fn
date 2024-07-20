@@ -13,7 +13,9 @@ export const AdminLayout: React.FC = () => {
       <Sidebar menuActive={menuActive} />
       <section className="flex-1 flex flex-col">
         <Navbar onClick={handleMenu} />
-        <Outlet />
+        <main className="flex-1 overflow-y-auto pb-3">
+          <Outlet />
+        </main>
       </section>
     </main>
   );
