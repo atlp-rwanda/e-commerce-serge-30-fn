@@ -1,21 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
   totalNumber: 0,
+  cartId: '',
 };
 
 const totalNumberSlice = createSlice({
   name: 'totalNumber',
   initialState,
   reducers: {
-    setTotalNumber: (state, action) => {
+    setTotalNumber: (state, action: PayloadAction<number>) => {
       state.totalNumber = action.payload;
     },
-    incrementTotalNumber: (state, action) => {
-      state.totalNumber += action.payload || 1;
-    },
-    decrementTotalNumber: (state, action) => {
-      state.totalNumber -= action.payload || 1;
+    setCartId: (state, action: PayloadAction<string>) => {
+      state.cartId = action.payload;
     },
     resetTotalNumber: (state) => {
       state.totalNumber = initialState.totalNumber;
@@ -23,11 +21,7 @@ const totalNumberSlice = createSlice({
   },
 });
 
-export const {
-  setTotalNumber,
-  incrementTotalNumber,
-  decrementTotalNumber,
-  resetTotalNumber,
-} = totalNumberSlice.actions;
+export const { setTotalNumber, setCartId, resetTotalNumber } =
+  totalNumberSlice.actions;
 
 export default totalNumberSlice.reducer;

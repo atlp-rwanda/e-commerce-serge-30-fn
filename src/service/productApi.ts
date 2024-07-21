@@ -171,14 +171,9 @@ const productApi = ecommerceSergeApi.injectEndpoints({
       }),
     }),
     getCategories: builder.query<unknown, string>({
-      query: (token) => ({
+      query: () => ({
         url: '/api/v1/categories/all',
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${token}`,
-        },
-        credentials: 'include',
       }),
     }),
     recommendedProducts: builder.mutation({
@@ -189,6 +184,25 @@ const productApi = ecommerceSergeApi.injectEndpoints({
           'Content-Type': 'application/json',
           Authorization: `${token}`,
         },
+      }),
+    }),
+    deleteCartProduct: builder.mutation({
+      query: ({ productId }) => ({
+        url: `api/v1/cart/deletecartitem/${productId}`,
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
+    updateCartQuantity: builder.mutation({
+      query: ({ cartId, productId, quantity }) => ({
+        url: `api/v1/cart/updatecart/${cartId}`,
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: { productId, quantity },
       }),
     }),
   }),
@@ -211,4 +225,6 @@ export const {
   useUpdateProductMutation,
   useGetCategoriesQuery,
   useRecommendedProductsMutation,
+  useDeleteCartProductMutation,
+  useUpdateCartQuantityMutation,
 } = productApi;
