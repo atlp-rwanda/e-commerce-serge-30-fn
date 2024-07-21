@@ -4,7 +4,7 @@ import { Loading } from '../../utils/Loading';
 import { useParams } from 'react-router-dom';
 import StarIcon from './StarIcon';
 import { CiHeart } from 'react-icons/ci';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import Deliverydetails from './DeliveryDetails';
 import { ProductReviews } from '../../components/usercomponents/reviews';
 import Footer from '../../components/rootcomponents/Footer';
@@ -16,6 +16,7 @@ import { IProduct } from '../../types';
 export const ProductDetails: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<IProduct | null>(null);
+  const [quantity, setQuantity] = useState<number>(1);
   const [getProductById, { isLoading }] = useGetProductByIdMutation();
 
   const fetchProduct = async () => {
@@ -37,6 +38,18 @@ export const ProductDetails: React.FC = () => {
       fetchProduct();
     }
   }, [productId, getProductById]);
+
+  const handleUpdateQuantity = (change: number) => {
+    const newQuantity = quantity + change;
+    if (newQuantity < 1) {
+      toast.error('Quantity must be at least 1');
+      return;
+    }
+    setQuantity(newQuantity);
+  };
+
+  const increaseQuantity = () => handleUpdateQuantity(1);
+  const decreaseQuantity = () => handleUpdateQuantity(-1);
 
   if (isLoading)
     return (
@@ -105,19 +118,29 @@ export const ProductDetails: React.FC = () => {
 
               <div className="flex items-center justify-between py-4">
                 <div className="flex items-center gap-2">
-                  <Button className="px-3 py-1 bg-gray-200 hover:text-white rounded-lg">
+                  <Button
+                    className="px-3 py-1 bg-gray-200 hover:text-white rounded-lg"
+                    onClick={decreaseQuantity}
+                  >
                     -
                   </Button>
                   <span className="px-3 py-1 bg-gray-100 hover:bg-gray-100 rounded-lg">
-                    1
+                    {quantity}
                   </span>
-                  <Button className="px-3 text-white py-1 bg-black rounded-lg">
+                  <Button
+                    className="px-3 text-white py-1 bg-black rounded-lg"
+                    onClick={increaseQuantity}
+                  >
                     +
                   </Button>
                 </div>
 
                 <div className="flex gap-4">
-                  <AddToCartButton product={product} hidden={false} />
+                  <AddToCartButton
+                    product={product}
+                    hidden={false}
+                    quantity={quantity}
+                  />
                   <Button className="flex items-center gap-2 px-4 py-2 border bg-white text-gray-900 hover:text-white rounded-lg">
                     <CiHeart className="w-6 h-6" />
                   </Button>

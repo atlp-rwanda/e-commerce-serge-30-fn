@@ -11,11 +11,14 @@ import { IUser } from '../../types';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MdShoppingCart } from 'react-icons/md';
+import { useAppDispatch } from '../../hooks';
+import { setCartId } from '../../slices/cartNumber.slice';
 
 const Cart: React.FC = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const navigate = useNavigate();
   const adminVendorToastShownRef = useRef(false);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -46,6 +49,12 @@ const Cart: React.FC = () => {
       skip: !authenticated,
     },
   );
+
+  useEffect(() => {
+    if (items && items.cart) {
+      dispatch(setCartId(items.cart.id));
+    }
+  }, [items, dispatch]);
 
   useEffect(() => {
     if (authenticated) {
@@ -85,7 +94,7 @@ const Cart: React.FC = () => {
     if (errorMessage === 'Your cart is empty') {
       return (
         <h1 className="p-4 text-center bg-blue-400">
-          <span className='flex items-center justify-center text-white gap-2'>
+          <span className="flex items-center justify-center text-white gap-2">
             <MdShoppingCart />
             Your cart is empty
           </span>
@@ -103,7 +112,6 @@ const Cart: React.FC = () => {
   if (!items || items.cart.products.length === 0) {
     return <h1 className="p-4 text-center bg-blue-400">Your cart is empty</h1>;
   }
-
   const cartItems = items.cart.products;
 
   const handleCheckoutClick = () => {

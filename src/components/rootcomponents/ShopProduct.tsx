@@ -38,7 +38,7 @@ const ShopProduct: React.FC = () => {
     products.data.length > 9 ? products.data.slice(0, 9) : products.data;
 
   return (
-    <div className="flex flex-wrap gap-8 justify-center px-8 py-12 h-[748px] overflow-hidden">
+    <div className="flex flex-wrap gap-8 justify-center px-8 py-12 h-[790px] overflow-hidden">
       <ToastContainer />
       {productsData.map((product: IProduct) => {
         const isInWishlist: boolean = wishlistData?.some(
@@ -78,7 +78,7 @@ const ShopProduct: React.FC = () => {
                 <span className="text-xs">(102)</span>
               </div>
               <h2 className="font-bold py-2 group-hover:py-0">
-                {product.price}
+                ${product.price}
               </h2>
               <AddToCartButton product={product} hidden={true} />
             </div>
