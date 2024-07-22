@@ -1,12 +1,10 @@
 import React from 'react';
 import {
-  MdOutlineDashboardCustomize,
   MdFavoriteBorder,
   MdPayment,
 } from 'react-icons/md';
 import { GrUserWorker } from 'react-icons/gr';
 import { HiUsers } from 'react-icons/hi';
-import { IoBagHandleOutline } from 'react-icons/io5';
 
 export type SidebarLink = {
   id: number;
@@ -16,12 +14,6 @@ export type SidebarLink = {
 };
 
 export const AdminSidebarLinks: SidebarLink[] = [
-  {
-    id: 1,
-    name: 'Dashboard',
-    icon: MdOutlineDashboardCustomize,
-    link: '/',
-  },
   {
     id: 2,
     name: 'Orders',
@@ -39,12 +31,6 @@ export const AdminSidebarLinks: SidebarLink[] = [
     name: 'Vendor',
     icon: GrUserWorker,
     link: '/vendors',
-  },
-  {
-    id: 5,
-    name: 'Products',
-    icon: IoBagHandleOutline,
-    link: '/categories',
   },
   {
     id: 6,

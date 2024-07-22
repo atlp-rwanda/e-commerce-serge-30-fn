@@ -222,6 +222,16 @@ const authApi = ecommerceSergeApi.injectEndpoints({
         };
       },
     }),
+    fetchAllVendors: builder.query<User[], void>({
+      query: () => ({
+        url: 'api/v1/vendors/all',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
   }),
 });
 export const {
@@ -243,4 +253,5 @@ export const {
   useUserDataByIdMutation,
   useMarkAllAsReadMutation,
   useGetAllChatsQuery,
+  useFetchAllVendorsQuery
 } = authApi;

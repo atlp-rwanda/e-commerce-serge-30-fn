@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IProduct {
   product_id: string;
   vendor_id: string;
@@ -56,6 +58,12 @@ export interface IOrderItem {
   image_url: string[];
 }
 export interface IOrder {
+  totalPrice: any;
+  products: any;
+  created_at: string;
+  total: ReactNode;
+  items: any;
+  id: string| null | undefined;
   user_id?: string;
   total_amount?: number;
   status?: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
@@ -134,7 +142,23 @@ interface Category {
   name: string;
 }
 export interface CategoriesDatas {
-  data: Category[];
+  datas: Category[];
   success: boolean;
   message: string;
+  data: IProduct[];
+}
+export interface IPayment {
+  payment_status: string;
+  payment_method: ReactNode;
+  createdAt: string | number | Date;
+  momoId: any;
+  stripeId: any;
+  orderId: ReactNode;
+  id: string;
+  productName: string;
+  paymentId: string;
+  date: string;
+  customerName: string;
+  status: string;
+  amount: number;
 }

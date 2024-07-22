@@ -12,3 +12,6 @@ export * from './authpages/RequestPwdChangePage';
 export * from './authpages/SignupPage';
 export * from './vendorpages/addProducts';
 export * from './vendorpages/ProductUpdatePage';
+export * from './adminpages/Orders';
+export * from './adminpages/Payments';
+export * from './adminpages/Vendors';
