@@ -15,6 +15,7 @@ export interface IProduct {
   reviewsCount: number;
   createdAt: string;
   updatedAt: string;
+  id: string;
   Category: {
     category_id: string;
     name: string;

@@ -171,14 +171,9 @@ const productApi = ecommerceSergeApi.injectEndpoints({
       }),
     }),
     getCategories: builder.query<unknown, string>({
-      query: (token) => ({
+      query: () => ({
         url: '/api/v1/categories/all',
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `${token}`,
-        },
-        credentials: 'include',
       }),
     }),
     recommendedProducts: builder.mutation({

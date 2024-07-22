@@ -14,4 +14,6 @@ export interface Order {
   products: IProduct[];
   createdAt: string;
   updatedAt: string;
+  customer: string;
+  total: number;
 }
