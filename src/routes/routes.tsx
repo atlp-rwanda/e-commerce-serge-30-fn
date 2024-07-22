@@ -20,6 +20,9 @@ import { Product, ProductItem } from '../pages/vendorpages';
 import BillingDetails from '../components/usercomponents/BillingDetails';
 import Cart from '../pages/rootpages/Cart';
 import { ProductDetails } from '../components/rootcomponents/ProductDetails';
+import WishlistPage from '../pages/userPages/WishlistPage';
+import StoreCollection from '../pages/vendorpages/StoreCollection';
+import { VendorDashboard } from '../pages/vendor/VendorDashboard';
 
 export const router = createBrowserRouter([
   {
@@ -31,13 +34,11 @@ export const router = createBrowserRouter([
       { path: '/cart', element: <Cart /> },
       { path: '/shop', element: <Shop /> },
       { path: '/product/:productId', element: <ProductDetails /> },
+
       { path: '/billing-details', element: <BillingDetails /> },
       { path: '/payment/success', element: <PaymentSuccess /> },
       { path: '/payment/failure', element: <PaymentFailure /> },
-      {
-        path: '/payment/all',
-        element: <PaymentsPage />,
-    },
+
       { path: '*', element: <Pages.NotFoundPage /> },
     ],
   },
@@ -59,21 +60,27 @@ export const router = createBrowserRouter([
     path: 'user',
     element: <Layouts.UserLayout />,
     children: [
-        { index: true, element: <Home /> },
-        { path: 'me', element: <authPages.UserSettings /> },
-        {
-            path: 'notifications',
-            element: <NotificationPage />,
-        },
-        { path: 'chat', element: <Chat /> },
-        { path: 'orders/all', element: <userPages.OrderPage /> },
-        { path: 'orders/:id', element: <userPages.SingleOrder /> },
+      { index: true, element: <Home /> },
+      { path: 'me', element: <authPages.UserSettings /> },
+      {
+        path: 'notifications',
+        element: <NotificationPage />,
+      },
+      { path: 'chat', element: <Chat /> },
+      { path: 'orders/all', element: <userPages.OrderPage /> },
+      { path: 'orders/:id', element: <userPages.SingleOrder /> },
+      { path: 'wishlist', element: <WishlistPage /> },
+      {
+        path: 'payment/all',
+        element: <PaymentsPage />,
+      },
     ],
-},
+  },
   {
     path: 'vendor',
     element: <Layouts.VendorLayout />,
     children: [
+      { index: true, element: <VendorDashboard /> },
       {
         path: 'products',
         element: <Product />,
@@ -87,6 +94,8 @@ export const router = createBrowserRouter([
         path: 'products/new',
         element: <Pages.AddProducts />,
       },
+      { path: 'chat', element: <Chat /> },
+      { path: 'store', element: <StoreCollection /> },
     ],
   },
   {
@@ -94,6 +103,7 @@ export const router = createBrowserRouter([
     element: <Layouts.AdminLayout />,
     children: [
       { path: 'users', element: <Users /> },
+      { path: 'chat', element: <Chat /> },
       { path: 'orders', element: <Orders /> },
       { path: 'products', element: <Payments /> },
       { path: 'vendors', element: <Vendors /> },

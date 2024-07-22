@@ -15,8 +15,6 @@ describe('Sidebar component', () => {
     expect(screen.getByTestId('cart-icon')).toBeInTheDocument();
     expect(screen.getByTestId('dashboard-icon')).toBeInTheDocument();
     expect(screen.getByTestId('products-icon')).toBeInTheDocument();
-    expect(screen.getByTestId('notifications-icon')).toBeInTheDocument();
-    expect(screen.getByTestId('categories-icon')).toBeInTheDocument();
 
     // Check for navigation links
     expect(screen.getByTestId('navlink-dashboard')).toHaveTextContent(
@@ -24,12 +22,6 @@ describe('Sidebar component', () => {
     );
     expect(screen.getByTestId('navlink-products')).toHaveTextContent(
       'Products',
-    );
-    expect(screen.getByTestId('navlink-notifications')).toHaveTextContent(
-      'Notifications',
-    );
-    expect(screen.getByTestId('navlink-categories')).toHaveTextContent(
-      'Categories',
     );
   });
 

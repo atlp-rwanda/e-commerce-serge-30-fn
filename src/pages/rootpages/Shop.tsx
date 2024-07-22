@@ -9,6 +9,10 @@ export default function Shop() {
   const [dataToDisplay, setDataToDisplay] = useState<IProduct[]>([]);
   const [error, setError] = useState('');
   const [isError, setIsError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const getLoading = (loading: boolean) => {
+    setLoading(loading);
+  };
   const filteredData = (data: IProduct[]) => {
     setDataToDisplay(data);
     setIsError(false);
@@ -26,8 +30,12 @@ export default function Shop() {
   return (
     <div>
       <div className="flex bg-[#fafafa] max-md:flex-col">
-        <SideBarFilter filteredData={filteredData} getError={getError} />
-        {isLoading ? (
+        <SideBarFilter
+          filteredData={filteredData}
+          getError={getError}
+          getLoading={getLoading}
+        />
+        {isLoading || loading ? (
           <SkeletonProduct />
         ) : isError ? (
           <h1 className="text-red-700 self-center ml-72 text-2xl max-md:m-20">

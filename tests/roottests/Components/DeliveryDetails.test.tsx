@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import  Deliverydetails from '../../../src/components/rootcomponents/DeliveryDetails';
+import Deliverydetails from '../../../src/components/rootcomponents/DeliveryDetails';
 describe('Deliverydetails', () => {
   it('renders the delivery details correctly', () => {
     render(<Deliverydetails />);

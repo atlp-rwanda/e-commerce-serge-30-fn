@@ -5,7 +5,7 @@ import {
 } from 'react-icons/md';
 import { GrUserWorker } from 'react-icons/gr';
 import { HiUsers } from 'react-icons/hi';
-
+import { IoChatbubblesOutline } from 'react-icons/io5';
 export type SidebarLink = {
   id: number;
   name: string;
@@ -37,6 +37,12 @@ export const AdminSidebarLinks: SidebarLink[] = [
     name: 'users',
     icon: HiUsers,
     link: '/users',
+  },
+  {
+    id: 7,
+    name: 'chat',
+    icon: IoChatbubblesOutline,
+    link: '/chat',
   },
 ];
 

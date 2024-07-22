@@ -1,12 +1,10 @@
 // src/components/Sidebar/VendorSidebarLinks.tsx
 
 import React from 'react';
-import {
-  MdOutlineDashboardCustomize,
-  MdOutlineCategory,
-  MdOutlineNotificationsActive,
-} from 'react-icons/md';
+import { MdOutlineDashboardCustomize } from 'react-icons/md';
 import { IoBagHandleOutline } from 'react-icons/io5';
+import { IoChatbubblesOutline } from 'react-icons/io5';
+import { FaStore } from 'react-icons/fa';
 
 export type SidebarLink = {
   id: number;
@@ -28,17 +26,18 @@ export const VendorSidebarLinks: SidebarLink[] = [
     icon: IoBagHandleOutline,
     link: '/products',
   },
+
   {
-    id: 3,
-    name: 'Notifications',
-    icon: MdOutlineNotificationsActive,
-    link: '/notifications',
+    id: 5,
+    name: 'Chat',
+    icon: IoChatbubblesOutline,
+    link: '/chat',
   },
   {
-    id: 4,
-    name: 'Categories',
-    icon: MdOutlineCategory,
-    link: '/categories',
+    id: 6,
+    name: 'Store',
+    icon: FaStore,
+    link: '/store',
   },
 ];
 

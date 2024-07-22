@@ -1,8 +1,9 @@
 import { FaRegHeart } from 'react-icons/fa';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
 import { IoBagHandleOutline } from 'react-icons/io5';
-import { MdStarOutline, MdOutlineNotificationsActive } from 'react-icons/md';
+import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { IoChatbubblesOutline } from 'react-icons/io5';
+import { MdOutlinePayment } from 'react-icons/md';
 import React from 'react';
 
 export type UserSidebarLink = {
@@ -27,9 +28,9 @@ export const sidebarLinks: UserSidebarLink[] = [
   },
   {
     id: 3,
-    name: 'Reviews',
-    icon: MdStarOutline,
-    link: '/reviews',
+    name: 'Payments',
+    icon: MdOutlinePayment,
+    link: '/payment/all',
   },
   {
     id: 4,

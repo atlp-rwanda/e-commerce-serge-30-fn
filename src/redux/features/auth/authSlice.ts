@@ -24,12 +24,14 @@ export interface UserState {
   token: string | null;
   user: User | null;
   isAuthenticated: boolean;
+  twoAuth: boolean;
 }
 
 const initialState: UserState = {
   token: localStorage.getItem('token'),
   user: JSON.parse(localStorage.getItem('user')!) || 'null',
   isAuthenticated: !!localStorage.getItem('token'),
+  twoAuth: !!localStorage.getItem('twoAuth'),
 };
 
 const userSlice = createSlice({
@@ -63,13 +65,22 @@ const userSlice = createSlice({
     setAuthentication(state, action) {
       state.isAuthenticated = action.payload;
     },
+    setTwoAuth: (state, action: PayloadAction<boolean>) => {
+      state.twoAuth = action.payload;
+      localStorage.setItem('twoAuth', JSON.stringify(action.payload));
+    },
   },
 });
 export interface CustomJwtPayload extends JwtPayload {
   user: User;
 }
-export const { setToken, setUser, clearUserData, setAuthentication } =
-  userSlice.actions;
+export const {
+  setToken,
+  setUser,
+  clearUserData,
+  setAuthentication,
+  setTwoAuth,
+} = userSlice.actions;
 export const selectToken = (state: RootState) => state.user.token;
 
 export default userSlice.reducer;

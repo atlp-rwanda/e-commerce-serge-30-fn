@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import logo from '../../assets/Group 1000005934.png';
 import pride from '../../assets/store-card-40-pride-202405.jpeg';
 import { Input } from '../../components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { Button } from '../../components/rootcomponents/Button';
 import { ColorRing } from 'react-loader-spinner';
@@ -15,6 +15,7 @@ import {
   useVerifyCodeMutation,
 } from '../../service/authApi';
 import { useToken } from '../../hooks/useToken';
+import { setTwoAuth } from '../../redux/features/auth/authSlice';
 const TwoFactorAuth = () => {
   const navigate = useNavigate();
   const { user } = useToken();
@@ -28,7 +29,9 @@ const TwoFactorAuth = () => {
   const isAuthenticated = useSelector(
     (state: RootState) => state.user.isAuthenticated,
   );
-
+  const dispatch = useDispatch();
+  const twoAuthState = JSON.parse(localStorage.getItem('twoAuth') || 'false');
+  console.log(twoAuthState);
   useEffect(() => {
     const tokenss = localStorage.getItem('token');
     setTokens(tokenss);
@@ -67,6 +70,7 @@ const TwoFactorAuth = () => {
           if (response.data) {
             console.log(response.data.message);
             toast.success(response.data.message);
+            dispatch(setTwoAuth(true));
             navigate('/vendor');
           }
           if (response.error) {

@@ -205,6 +205,16 @@ const productApi = ecommerceSergeApi.injectEndpoints({
         body: { productId, quantity },
       }),
     }),
+    createStore: builder.mutation({
+      query: ({ name, description }) => ({
+        url: `api/v1/vendors`,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: { store_name: name, store_description: description },
+      }),
+    }),
   }),
 });
 
@@ -227,4 +237,5 @@ export const {
   useRecommendedProductsMutation,
   useDeleteCartProductMutation,
   useUpdateCartQuantityMutation,
+  useCreateStoreMutation,
 } = productApi;

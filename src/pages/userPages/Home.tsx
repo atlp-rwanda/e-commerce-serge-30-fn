@@ -12,9 +12,9 @@ const Home = () => {
     if (!token) navigate('/');
   }, [navigate, token]);
   return (
-    <div className="">
-      <div className="bg-gradient-to-r from-blue-800 to-white via-white custom  h-56 m-4 rounded-md flex justify-between ">
-        <div className="p-4">
+    <div className="min-h-full">
+      <div className="bg-gradient-to-r from-blue-800 to-white via-white custom  h-56 m-4 rounded-md flex justify-between  max-tablet:bg-gradient-to-r max-tablet:from-blue-800 max-tablet:to-white">
+        <div className="p-4 ">
           <h1 className="text-white text-3xl">
             New Arrival change <br />
             your lifestyle
@@ -32,7 +32,7 @@ const Home = () => {
             <CiLocationArrow1 />
           </Button>
         </div>
-        <div className="h-56 w-72">
+        <div className="h-56 w-72 max-tablet:hidden">
           <img
             src={images}
             alt="vision"
