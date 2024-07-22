@@ -1,7 +1,7 @@
 import { ecommerceSergeApi } from './index';
 import { Order } from '../types';
-import { IOrder, IOrderResponse } from '../types/Product.types';
-
+import { IOrder, IOrderResponse, IProduct} from '../types/Product.types';
+import { IPayment } from '../types/index';
 const orderApi = ecommerceSergeApi.injectEndpoints({
   endpoints: (builder) => ({
     createOrder: builder.mutation<
@@ -48,8 +48,32 @@ const orderApi = ecommerceSergeApi.injectEndpoints({
         body: paymentDetails,
       }),
     }),
+    fetchAllOrders: builder.query<IOrder[], void>({
+      query: () => ({
+        url: 'api/v1/orders/all',
+        headers: {
+          Authorization: `${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
+    getProductById: builder.query<IProduct, string>({
+      query: (productId) => ({
+        url: `api/v1/product/${productId}`,
+        headers: {
+          Authorization: `${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
+    fetchAllPayments: builder.query<{ data: IPayment[] }, void>({
+      query: () => ({
+        url: 'api/v1/payment/all',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }),
+    }),
   }),
 });
 
 
-export const { useGetAllOrdersQuery, useGetSingleOrderQuery,useCreateOrderMutation, useCreatePaymentSessionMutation } = orderApi;
+export const { useGetAllOrdersQuery, useGetSingleOrderQuery, useCreatePaymentSessionMutation,useCreateOrderMutation, useFetchAllOrdersQuery, useGetProductByIdQuery, useFetchAllPaymentsQuery  } = orderApi;

@@ -93,6 +93,11 @@ const BillingDetails: React.FC = () => {
           zip_code: formData.zipCode,
         },
         ...formData,
+        totalPrice: undefined,
+        products: undefined,
+        total: undefined,
+        items: undefined,
+        id: undefined,
       });
 
       if (result.data && selectedPaymentMethod === 'Bank') {
